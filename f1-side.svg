@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" fill="none">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff3a12"/>
+      <stop offset="0.55" stop-color="#ff2800"/>
+      <stop offset="1" stop-color="#c81e00"/>
+    </linearGradient>
+    <radialGradient id="rim" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset="0.7" stop-color="#0c0c0c"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- floor / main body -->
+  <path fill="url(#body)" d="
+    M70 250
+    L150 250
+    C170 205 205 196 250 196
+    L360 196
+    C395 196 405 178 430 168
+    C470 152 520 150 560 150
+    C590 150 610 150 640 156
+    L700 168
+    C740 176 770 182 815 182
+    L980 182
+    C1010 182 1030 190 1040 206
+    L1120 214
+    C1140 218 1150 228 1150 240
+    L1150 250
+    L1090 250
+    C1082 224 1058 206 1030 206
+    C1002 206 978 224 970 250
+    L320 250
+    C312 224 288 206 260 206
+    C232 206 208 224 200 250
+    Z"/>
+
+  <!-- cockpit / airbox hump -->
+  <path fill="#0c0c0c" d="
+    M560 150
+    C575 118 600 112 625 112
+    L690 112
+    C700 112 706 120 704 130
+    L700 168
+    L640 156
+    C610 150 590 150 560 150 Z"/>
+
+  <!-- halo -->
+  <path stroke="#161616" stroke-width="9" stroke-linecap="round" fill="none" d="
+    M690 132
+    C640 118 590 126 566 150"/>
+  <rect x="612" y="122" width="9" height="30" rx="4" fill="#161616"/>
+
+  <!-- nose -->
+  <path fill="url(#body)" d="
+    M70 250 L70 232 C70 224 76 218 86 216 L150 210 L150 250 Z"/>
+
+  <!-- front wing -->
+  <rect x="34" y="244" width="150" height="12" rx="3" fill="#0c0c0c"/>
+  <rect x="40" y="230" width="60" height="9" rx="3" fill="#0c0c0c"/>
+
+  <!-- rear wing -->
+  <rect x="1096" y="120" width="104" height="20" rx="3" fill="#0c0c0c"/>
+  <rect x="1104" y="140" width="88" height="10" rx="2" fill="#1c1c1c"/>
+  <rect x="1150" y="140" width="12" height="80" rx="3" fill="#0c0c0c"/>
+
+  <!-- sidepod detail line -->
+  <path stroke="#c81e00" stroke-width="6" fill="none" d="M770 200 L980 200"/>
+  <path stroke="#ffffff" stroke-width="3" fill="none" opacity="0.85" d="M430 176 L700 176"/>
+
+  <!-- number roundel -->
+  <circle cx="500" cy="188" r="20" fill="#fff"/>
+  <text x="500" y="196" font-family="Archivo, sans-serif" font-weight="900" font-size="24" fill="#0a0a0a" text-anchor="middle">16</text>
+
+  <!-- rear tyre -->
+  <circle cx="1030" cy="250" r="72" fill="#111"/>
+  <circle cx="1030" cy="250" r="71" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+  <circle cx="1030" cy="250" r="34" fill="url(#rim)"/>
+  <circle cx="1030" cy="250" r="10" fill="#ff2800"/>
+
+  <!-- front tyre -->
+  <circle cx="260" cy="250" r="62" fill="#111"/>
+  <circle cx="260" cy="250" r="61" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+  <circle cx="260" cy="250" r="28" fill="url(#rim)"/>
+  <circle cx="260" cy="250" r="9" fill="#ff2800"/>
+</svg>
