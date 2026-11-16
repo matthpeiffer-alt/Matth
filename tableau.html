@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matthieu Peiffer — Mon parcours</title>
+<meta name="description" content="Matthieu Peiffer, élève ingénieur généraliste à l'ICAM Strasbourg-Europe, cherche un stage de fin d'études du 24 mai au 16 juillet 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="prefetch" href="formation.html"><link rel="prefetch" href="projets.html"><link rel="prefetch" href="experiences.html"><link rel="prefetch" href="realisations.html">
+<style>
+:root{
+  --ink:#1b2445; --ink2:#4b557a; --red:#c4231c;
+  --y:#fde68a; --b:#bfdff7; --g:#c6ecc4; --p:#f9c9b4;
+  --hand:'Kalam','Segoe Print',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden}
+html:has(body.L){overflow:hidden}
+body{font-family:var(--hand);color:var(--ink);-webkit-font-smoothing:antialiased;
+  /* mur en planches de bois, éclairé par la lampe du tableau */
+  background-color:#5b3a22;
+  background-image:
+    radial-gradient(ellipse 58% 52% at 50% 30%,rgba(255,206,140,.30),transparent 72%),
+    radial-gradient(ellipse at 50% 45%,transparent 38%,rgba(12,6,0,.62) 100%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.45) 0 2px,rgba(255,226,190,.08) 2px 3px,transparent 3px 170px),
+    repeating-linear-gradient(90deg,rgba(255,235,210,.05) 0 170px,rgba(0,0,0,.08) 170px 340px,rgba(255,235,210,.025) 340px 510px,rgba(0,0,0,.14) 510px 680px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='1000' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.15882 .004' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .62 0 0 0 0 .40 0 0 0 0 .22 0 0 0 1.25 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  background-size:auto,auto,auto,auto,680px 100%}
+body.L{height:100vh;overflow:hidden}
+body.P{background-attachment:scroll;min-height:100vh}
+
+/* ---------- scène à taille fixe, mise à l'échelle de l'écran ---------- */
+.fit{position:relative;margin:0 auto;overflow:hidden;width:0;height:0}
+.L .fit{overflow:visible}
+.P .fit{overflow-x:clip;overflow-y:visible}
+
+/* ---------- le bureau au premier plan ---------- */
+.desk{position:fixed;left:0;right:0;bottom:0;height:var(--dh,150px);z-index:40;pointer-events:none}
+.P .desk{position:relative;margin-top:7vw}
+.desk::before{content:"";position:absolute;left:0;right:0;top:-46px;height:46px;background:linear-gradient(transparent,rgba(10,5,0,.42))}
+.desk .top{position:absolute;left:0;right:0;top:0;height:64%;
+  background:
+    linear-gradient(180deg,rgba(255,240,215,.20),rgba(0,0,0,.10)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120' preserveAspectRatio='none'%3E%3Cfilter id='o'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .2' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .36 0 0 0 0 .2 0 0 0 1 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23o)'/%3E%3C/svg%3E") 0 0/100% 100%,
+    #a87346;
+  box-shadow:inset 0 7px 9px -5px rgba(20,10,0,.55)}
+/* reflet de la lampe sur le vernis du bureau */
+.desk .top::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 34% 70% at 50% 30%,rgba(255,228,180,.22),transparent 70%)}
+/* chant avant arrondi */
+.desk .edge{position:absolute;left:0;right:0;bottom:0;height:36%;
+  background:linear-gradient(180deg,#f0c08a 0,#c98f5a 3%,#93603a 9%,#6d4224 45%,#40250f 100%);box-shadow:0 -1px 0 rgba(60,30,10,.5)}
+.desk .obj{position:absolute;height:auto;overflow:visible}
+.L .desk{--u:1vh} .P .desk{--u:1.45vw}
+/* le bas de chaque dessin = le point de contact avec le bureau ; plus il est au fond, plus il est haut */
+.desk .plant{left:86%;bottom:calc(var(--dh)*.70);width:calc(var(--u)*13)}
+.desk .mug{left:72%;bottom:calc(var(--dh)*.60);width:calc(var(--u)*14)}
+.desk .pads{left:8%;bottom:calc(var(--dh)*.47);width:calc(var(--u)*20)}
+.desk .marker{left:21%;bottom:calc(var(--dh)*.43);width:calc(var(--u)*22)}
+.P .desk .pads{left:4%} .P .desk .marker{left:28%} .P .desk .mug{left:60%} .P .desk .plant{left:80%}
+/* le café frémit : le reflet bouge à peine */
+.mug .glint{animation:glint 3.8s ease-in-out infinite alternate}
+@keyframes glint{from{transform:translate(0,0);opacity:.7}to{transform:translate(5px,.4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.mug .glint{animation:none}}
+
+/* ---------- le bureau vit ---------- */
+.desk .obj{pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* plante : léger balancement permanent + réaction quand on la frôle (--pw piloté en JS) */
+.plant .lv{transform-box:view-box;transform-origin:65px 128px;transform:rotate(calc(var(--pw,0) * var(--k,1) * 1deg));
+  animation:sway var(--sd,5s) ease-in-out var(--sl,0s) infinite alternate}
+@keyframes sway{from{rotate:calc(var(--k,1) * -1.8deg)}to{rotate:calc(var(--k,1) * 2.1deg)}}
+/* le premier post-it se soulève */
+.pads .flap{transform-box:view-box;transform-origin:166px 64px;transition:transform .45s cubic-bezier(.3,1.7,.5,1)}
+.pads:hover .flap{transform:rotate(-14deg) scale(1.25)}
+.pads.flut .flap{animation:flut .7s ease-out}
+@keyframes flut{20%{transform:rotate(-26deg) scale(1.45)}45%{transform:rotate(-6deg) scale(1.15)}70%{transform:rotate(-16deg) scale(1.3)}}
+/* poussière dans la lumière de la lampe */
+#dust{position:fixed;inset:0;width:100vw;height:100vh;z-index:35;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.plant .lv{animation:none}#dust{display:none}}
+
+/* ---------- la lampe s'allume à l'arrivée ---------- */
+.dim{position:fixed;inset:0;z-index:60;pointer-events:none;background:#060300;opacity:.82;animation:lightson 1.3s ease-out 3s forwards}
+.lights .dim{animation-delay:0s}
+@keyframes lightson{0%{opacity:.82}10%{opacity:.3}16%{opacity:.75}24%{opacity:.22}30%{opacity:.5}46%{opacity:.06}100%{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.dim{display:none}}
+.stage{position:absolute;left:0;top:0;transform-origin:0 0}
+.L .stage{width:1600px;height:900px} .P .stage{width:800px;height:1960px}
+/* objets épinglés : position de base + déplacement (--tx/--ty) + balancement (--sw), pilotés en JS */
+.it{position:absolute;transform:translate(var(--tx,0px),var(--ty,0px)) rotate(calc(var(--r,0deg) + var(--sw,0deg)))}
+.anchor{position:absolute;left:50%;top:15px;width:0;height:0}
+
+/* ---------- le tableau ---------- */
+/* cadre en métal noir, accroché au mur (ombre portée vers le bas : la lumière vient d'en haut) */
+.board{position:absolute;inset:0;border-radius:6px;background:linear-gradient(160deg,#3a3c40 0%,#1b1c1f 45%,#0f1012 100%);
+  box-shadow:0 46px 70px -26px rgba(8,4,0,.75),0 14px 26px -10px rgba(8,4,0,.55),0 0 0 1px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.6)}
+/* surface en lin tendu : on peut y planter des punaises */
+.surface{position:absolute;inset:16px;border-radius:2px;overflow:hidden;background:#ece8df;
+  box-shadow:inset 0 3px 10px rgba(0,0,0,.28),inset 0 0 0 1px rgba(0,0,0,.25)}
+.surface::before{content:"";position:absolute;inset:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5 .06' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .36 0 0 0 0 .3 0 0 0 .10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* lumière chaude de la lampe à tableau, en haut */
+.surface::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 45% at 50% -8%,rgba(255,232,190,.55),transparent 70%),linear-gradient(transparent 60%,rgba(60,40,20,.10))}
+/* lampe à tableau (laiton) */
+.lamp{position:absolute;left:50%;top:-86px;width:460px;margin-left:-230px;height:80px;z-index:30;pointer-events:none}
+.lamp .plate{position:absolute;left:50%;top:0;width:54px;height:22px;margin-left:-27px;border-radius:4px;background:linear-gradient(#d9b56a,#8a6526);box-shadow:0 4px 8px rgba(0,0,0,.45)}
+.lamp .arm{position:absolute;left:50%;top:16px;width:8px;height:44px;margin-left:-4px;background:linear-gradient(90deg,#7a5a22,#e5c47e 45%,#7a5a22);border-radius:4px;box-shadow:6px 8px 10px rgba(0,0,0,.35)}
+.lamp .bar{position:absolute;left:0;right:0;top:52px;height:26px;border-radius:13px;
+  background:linear-gradient(#f0d491 0%,#c79b45 35%,#7e5a1f 75%,#5d4114 100%);box-shadow:0 10px 16px -4px rgba(0,0,0,.55)}
+.lamp .bar::after{content:"";position:absolute;left:18px;right:18px;bottom:-5px;height:8px;border-radius:50%;background:radial-gradient(ellipse at 50% 0,#fff8e0,rgba(255,230,170,.0) 70%);filter:blur(2px)}
+.P .lamp{top:-70px;width:380px;margin-left:-190px}
+/* traces de feutre mal effacées */
+.ghost{position:absolute;border-radius:50%;filter:blur(16px);background:rgba(50,60,90,.05)}
+/* la lampe : suit la souris */
+.light{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle 760px at var(--lx,30%) var(--ly,-10%),rgba(255,255,255,.62),rgba(255,255,255,0) 72%),
+             radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(40,40,50,.14) 100%)}
+.sig{position:absolute;font-weight:300;font-size:17px;color:#8b909a;transform:rotate(-2deg)}
+.L .sig{right:34px;bottom:22px} .P .sig{right:34px;bottom:26px;font-size:24px}
+
+/* ---------- dessins au feutre (vectoriels : ils se dessinent trait par trait) ---------- */
+.dd{position:absolute;z-index:1;height:auto;pointer-events:none;overflow:visible}
+.dd .st{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.dd .fl{fill:var(--ink);stroke:none}
+.ink{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.ink .st{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.P .ink.l{display:none}
+
+/* ---------- fiche centrale ---------- */
+.idc{z-index:4;background:#fffefb;padding:42px 30px 30px;text-align:center;cursor:grab;touch-action:auto;
+  box-shadow:calc(var(--sx,0) * 1px) calc(var(--sy,10) * 1px) 26px -10px rgba(20,20,30,.5),0 1px 1px rgba(0,0,0,.15)}
+.idc::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(transparent 0 33px,rgba(70,90,140,.07) 33px 34px)}
+.L .idc{left:550px;top:318px;width:500px;--r:1deg}
+.P .idc{left:40px;top:44px;width:720px;--r:.6deg}
+.idc .bot{top:auto;bottom:15px}
+.P .idc .bot{left:56.5%}
+.idc h1{font-weight:700;font-size:62px;line-height:1.05;white-space:nowrap;position:relative}
+.idc h1 span{display:inline-block}
+.idc .sw{display:block;width:330px;height:20px;margin:-6px auto 4px;overflow:visible}
+.idc .sub{font-size:20px;color:var(--ink2);white-space:nowrap}
+.idc .dates{margin-top:12px;font-size:25px;font-weight:700;color:var(--red);line-height:1.25}
+.idc .dates span{display:block;font-size:21px;font-weight:400}
+.idc .ct{margin-top:12px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-size:17px;color:var(--ink2)}
+.idc .ct a{color:inherit;text-decoration:none;border-bottom:1px dashed rgba(75,85,122,.5);cursor:pointer}
+.idc .ct a:hover{color:var(--red);border-color:var(--red)}
+.P .idc h1{font-size:78px} .P .idc .sw{width:420px} .P .idc .sub{font-size:26px} .P .idc .dates{font-size:31px} .P .idc .dates span{font-size:26px} .P .idc .ct{font-size:22px}
+
+/* ---------- post-it ---------- */
+.note{z-index:3;width:290px;border:0;background:none;text-align:left;cursor:grab;font:inherit;color:inherit;-webkit-tap-highlight-color:transparent;outline:none}
+.P .note{width:450px;cursor:pointer}
+.note .paper{position:relative;min-height:236px;padding:38px 24px 44px 26px;transform-origin:var(--px,50%) 15px;
+  background:linear-gradient(172deg,color-mix(in srgb,var(--c) 66%,#fff) 0%,var(--c) 42%,color-mix(in srgb,var(--c) 86%,#7a5a2a) 100%);
+  box-shadow:calc(var(--sx,0) * 1px) calc(var(--sy,8) * 1px) 18px -6px rgba(30,25,15,.45),0 1px 1px rgba(0,0,0,.14);
+  transition:transform .55s cubic-bezier(.3,1.6,.5,1)}
+.P .note .paper{min-height:300px;padding:44px 30px 52px 32px}
+/* grain du papier + coin qui rebique */
+.note .paper::before{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+.note .paper::after{content:"";position:absolute;right:0;bottom:0;width:74px;height:74px;pointer-events:none;
+  background:linear-gradient(315deg,rgba(0,0,0,.07) 0%,rgba(255,255,255,.38) 34%,transparent 58%)}
+.note h2{font-size:35px;font-weight:700;line-height:1.02;margin-bottom:12px;padding-bottom:9px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6 C 50 2, 120 9, 198 4' fill='none' stroke='%231b2445' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") left bottom / 70% 9px no-repeat}
+.note ul{list-style:none}
+.note li{font-size:22px;line-height:1.28;padding-left:18px;position:relative;margin-top:2px}
+.note li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.P .note h2{font-size:46px} .P .note li{font-size:30px;padding-left:22px} .P .note li::before{width:8px;height:8px}
+.n-form{--c:var(--g)} .n-proj{--c:var(--b)} .n-exp{--c:var(--y)} .n-real{--c:var(--p)}
+/* punaise côté centre */
+.L .n-form .anchor,.L .n-exp .anchor{left:84%} .L .n-proj .anchor,.L .n-real .anchor{left:16%}
+.L .n-form,.L .n-exp{--px:84%} .L .n-proj,.L .n-real{--px:16%}
+.P .note .anchor{left:93%} .P .note{--px:93%}
+.L .n-form{left:300px;top:92px;--r:-3deg}   .P .n-form{left:30px;top:452px;--r:-2deg}
+.L .n-proj{left:1010px;top:86px;--r:2.5deg} .P .n-proj{left:30px;top:822px;--r:1.5deg}
+.L .n-exp{left:300px;top:566px;--r:2.5deg}  .P .n-exp{left:30px;top:1192px;--r:-1.5deg}
+.L .n-real{left:1010px;top:572px;--r:-2.5deg} .P .n-real{left:30px;top:1562px;--r:2deg}
+/* le point qui invite à cliquer */
+.go{position:absolute;right:18px;bottom:14px;display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;color:var(--red)}
+.P .go{font-size:24px;right:24px;bottom:18px}
+.go b{opacity:0;transform:translateX(8px);transition:.3s}
+.dot{position:relative;width:15px;height:15px;flex:none}
+.P .dot{width:20px;height:20px}
+.dot::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(255,255,255,.55)}
+.dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2.5px solid var(--red);opacity:0}
+.ready .dot::after{animation:ping 1.8s cubic-bezier(.2,.6,.3,1) infinite}
+.n-proj .dot::after{animation-delay:.45s}.n-exp .dot::after{animation-delay:.9s}.n-real .dot::after{animation-delay:1.35s}
+@keyframes ping{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+@media (hover:hover){
+  .note:hover .paper,.note:focus-visible .paper{transform:rotate(calc(var(--k,1) * 2.5deg))}
+  .note:hover .go b,.note:focus-visible .go b{opacity:1;transform:none}
+}
+.L .n-proj,.L .n-real{--k:-1}
+.dragging,.dragging *{cursor:grabbing!important;user-select:none}
+.held .paper,.dragging .note .paper{transform:none!important}
+.note:focus-visible .paper{outline:3px dashed var(--ink2);outline-offset:6px}
+.note.tap .paper{animation:tap .5s}
+@keyframes tap{30%{transform:rotate(4deg) scale(.98)}65%{transform:rotate(-2.5deg)}}
+
+/* ---------- fil rouge + punaises (canvas physique) ---------- */
+#rope{position:absolute;left:0;top:0;z-index:20;pointer-events:none}
+
+/* ---------- intro ---------- */
+.anim .it,.anim .sig{opacity:0}
+.go-in .it{animation:drop .55s cubic-bezier(.2,.9,.3,1.2) both;animation-delay:var(--d)}
+@keyframes drop{from{opacity:0;translate:0 -26px;scale:1.07;rotate:5deg}60%{opacity:1}to{opacity:1;translate:0 0;scale:1;rotate:0deg}}
+.anim .idc h1 span{clip-path:inset(-20% 100% -20% 0)}
+.go-in .idc h1 span{animation:write 1s cubic-bezier(.5,.1,.3,1) forwards;animation-delay:.75s}
+.go-in .idc h1 span+span{animation-delay:1.3s}
+@keyframes write{to{clip-path:inset(-20% -3% -20% 0)}}
+.go-in .sig{animation:fade 1s ease 4.2s forwards}
+@keyframes fade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .anim .it,.anim .sig{opacity:1!important;animation:none!important}
+  .anim .idc h1 span{clip-path:none!important;animation:none!important}
+  .ready .dot::after{animation:none}
+}
+</style>
+</head>
+<body class="anim">
+
+<div class="fit" id="fit">
+<div class="stage" id="stage">
+  <div class="board"></div>
+  <div class="surface">
+    <div class="ghost" style="left:8%;top:44%;width:260px;height:90px"></div>
+    <div class="ghost" style="left:57%;top:6%;width:300px;height:70px;transform:rotate(-6deg)"></div>
+    <div class="ghost" style="left:42%;top:82%;width:280px;height:70px"></div>
+    <div class="light" id="light"></div>
+  </div>
+  <p class="sig">M.P. — nov. 2026</p>
+  <div class="lamp" aria-hidden="true"><i class="plate"></i><i class="arm"></i><i class="bar"></i></div>
+
+  <!-- ===== dessins au feutre : chacun illustre le post-it à côté ===== -->
+  <svg width="0" height="0" style="position:absolute"><filter id="mk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
+
+  <!-- formation : l'école + la toque -->
+  <svg class="dd" viewBox="0 0 250 180" data-t="2.3" data-l="36,104,248" data-p="500,486,262" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="3.4" d="M18 34 L52 21 L86 34 L52 47 Z"/>
+    <path class="st" stroke-width="3" d="M33 40 V52 C 43 59, 61 59, 71 52 V40"/>
+    <path class="st" stroke-width="2" d="M52 34 L80 39 L80 56"/><circle class="fl" cx="80" cy="59" r="3.4"/>
+    <path class="st" stroke-width="3.4" d="M70 162 V82 H180 V162"/>
+    <path class="st" stroke-width="3.4" d="M63 82 H187 M67 75 H183"/>
+    <path class="st" stroke-width="3.4" d="M180 162 V54 H214 V162"/>
+    <path class="st" stroke-width="3" d="M176 54 L197 36 L218 54"/>
+    <path class="st" stroke-width="2.2" d="M197 36 V12 M197 12 L217 17 L197 23"/>
+    <path class="st" stroke-width="2.2" d="M80 92h14v14h-14z M104 92h14v14h-14z M128 92h14v14h-14z M152 92h14v14h-14z"/>
+    <path class="st" stroke-width="2.2" d="M80 116h14v14h-14z M152 116h14v14h-14z"/>
+    <path class="st" stroke-width="2.8" d="M110 162 V140 C 110 130, 140 130, 140 140 V162"/>
+    <path class="st" stroke-width="1.8" d="M125 132 V162"/>
+    <path class="st" stroke-width="2" d="M191 66 v14 M203 66 v14 M191 96 v14 M203 96 v14 M191 126 v14 M203 126 v14"/>
+    <path class="st" stroke-width="3" d="M40 162 V130 M40 132 C 22 134, 15 114, 29 106 C 25 90, 45 82, 53 94 C 65 88, 76 101, 68 112 C 78 124, 62 136, 47 130"/>
+    <path class="st" stroke-width="1.5" d="M206 66 l7 -7 M206 76 l7 -7 M206 86 l7 -7 M206 96 l7 -7 M206 106 l7 -7 M206 116 l7 -7 M206 126 l7 -7 M206 136 l7 -7 M206 146 l7 -7 M206 156 l7 -7"/>
+    <path class="st" stroke-width="1.4" d="M74 88 l5 -4 M90 88 l5 -4 M106 88 l5 -4 M122 88 l5 -4 M138 88 l5 -4 M154 88 l5 -4 M170 88 l5 -4"/>
+    <path class="st" stroke-width="1.4" d="M74 176 l8 -6 M92 176 l8 -6 M110 176 l8 -6 M128 176 l8 -6 M146 176 l8 -6 M164 176 l8 -6 M182 176 l8 -6 M200 176 l8 -6"/>
+    <path class="st" stroke-width="2.6" d="M8 166 C 80 161, 170 169, 244 164"/>
+  </g></svg>
+
+  <!-- projets académiques : le robot -->
+  <svg class="dd" viewBox="0 0 200 200" data-t="2.5" data-l="1352,62,196" data-p="530,830,220" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="3.4" d="M74 20 H126 C 131 20, 134 23, 134 28 V56 C 134 61, 131 64, 126 64 H74 C 69 64, 66 61, 66 56 V28 C 66 23, 69 20, 74 20 Z"/>
+    <path class="st" stroke-width="2.4" d="M100 20 V8"/><circle class="fl" cx="100" cy="6" r="4"/>
+    <path class="st" stroke-width="2.8" d="M81 41 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 M103 41 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0"/>
+    <circle class="fl" cx="91" cy="42" r="3"/><circle class="fl" cx="113" cy="42" r="3"/>
+    <path class="st" stroke-width="2.4" d="M94 64 V72 M106 64 V72"/>
+    <path class="st" stroke-width="3.4" d="M66 72 H134 C 139 72, 142 75, 142 80 V124 C 142 129, 139 132, 134 132 H66 C 61 132, 58 129, 58 124 V80 C 58 75, 61 72, 66 72 Z"/>
+    <path class="st" stroke-width="2.4" d="M72 82 H128 V108 H72 Z"/>
+    <path class="st" stroke-width="2.2" d="M90 100 a10 10 0 0 1 20 0 M95 104 a5 5 0 0 1 10 0"/><circle class="fl" cx="100" cy="106" r="2"/>
+    <path class="st" stroke-width="2" d="M76 120 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 M90 120 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 M108 118 H130 M108 124 H124"/>
+    <path class="st" stroke-width="3" d="M58 84 C 42 90, 38 104, 44 116 M44 116 l-7 5 M44 116 l2 8"/>
+    <path class="st" stroke-width="3" d="M142 84 C 158 88, 162 100, 160 112 M160 112 l-6 6 M160 112 l6 5"/>
+    <path class="st" stroke-width="3" d="M72 132 H90 V150 H72 Z M110 132 H128 V148 H110 Z"/>
+    <path class="st" stroke-width="3.2" d="M81 150 V178 M119 148 L126 170"/>
+    <path class="st" stroke-width="3.4" d="M66 180 H96 M112 168 L140 178"/>
+    <path class="st" stroke-width="2" d="M18 112 H38 M10 128 H32 M20 144 H36"/>
+    <path class="st" stroke-width="1.6" d="M62 186 l6 -6 M72 186 l6 -6 M82 186 l6 -6 M92 186 l6 -6"/>
+    <path class="st" stroke-width="1.5" d="M133 84 l7 -7 M133 96 l7 -7 M133 108 l7 -7 M133 120 l7 -7 M126 30 l6 -6 M126 42 l6 -6 M126 54 l6 -6"/>
+    <path class="st" stroke-width="2.6" d="M16 188 C 80 184, 140 190, 192 186"/>
+  </g></svg>
+
+  <!-- expériences : site web (micro-entreprise) + la colo -->
+  <svg class="dd" viewBox="0 0 250 170" data-t="2.7" data-l="46,572,222" data-p="520,1222,236" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="3.4" d="M52 18 H198 C 203 18, 206 21, 206 26 V120 H44 V26 C 44 21, 47 18, 52 18 Z"/>
+    <path class="st" stroke-width="2.4" d="M54 28 H196 V112 H54 Z"/>
+    <path class="st" stroke-width="2" d="M54 40 H196"/><circle class="fl" cx="61" cy="34" r="2.2"/><circle class="fl" cx="68" cy="34" r="2.2"/><circle class="fl" cx="75" cy="34" r="2.2"/>
+    <path class="st" stroke-width="2" d="M64 50 H116 V80 H64 Z M64 50 L116 80 M116 50 L64 80"/>
+    <path class="st" stroke-width="2" d="M124 52 H186 M124 60 H176 M124 68 H182"/>
+    <path class="st" stroke-width="2.2" d="M124 76 H156 V86 H124 Z"/>
+    <path class="st" stroke-width="2" d="M64 92 H94 V104 H64 Z M100 92 H130 V104 H100 Z M136 92 H166 V104 H136 Z"/>
+    <path class="st" stroke-width="3.4" d="M44 120 L20 146 H230 L206 120"/>
+    <path class="st" stroke-width="3" d="M20 146 C 20 152, 24 155, 30 155 H220 C 226 155, 230 152, 230 146"/>
+    <path class="st" stroke-width="1.8" d="M52 127 H198 M44 134 H206 M106 141 H144"/>
+    <path class="st" stroke-width="1.4" d="M36 154 l7 -6 M54 154 l7 -6 M72 154 l7 -6 M90 154 l7 -6 M150 154 l7 -6 M168 154 l7 -6 M186 154 l7 -6 M204 154 l7 -6 M198 30 l6 -6 M198 46 l6 -6 M198 62 l6 -6 M198 78 l6 -6 M198 94 l6 -6"/>
+    <path class="st" stroke-width="2.4" d="M216 14 L228 3 M220 28 L236 25 M208 6 L209 -6"/>
+  </g></svg>
+  <svg class="dd" viewBox="0 0 180 110" data-t="3.2" data-l="90,752,156" data-p="566,1398,180" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="3.2" d="M14 96 L62 22 L110 96"/>
+    <path class="st" stroke-width="2.6" d="M62 22 L62 12 M50 96 L62 54 L74 96"/>
+    <path class="st" stroke-width="1.8" d="M14 96 L4 84 M110 96 L120 84"/>
+    <path class="st" stroke-width="2.8" d="M124 98 L160 86 M124 86 L160 98"/>
+    <path class="st" stroke-width="2.6" d="M142 86 C 128 76, 136 62, 141 50 C 145 60, 157 70, 148 84 C 151 75, 144 70, 142 64 C 140 72, 134 76, 142 86"/>
+    <path class="st" stroke-width="1.8" d="M152 46 l3 -6 M132 44 l-2 -6 M144 36 l0 -6"/>
+    <path class="st" stroke-width="1.4" d="M80 94 l9 -13 M88 94 l8 -11 M96 94 l6 -8 M74 70 l6 -9 M70 56 l4 -6"/>
+    <path class="st" stroke-width="2.4" d="M2 100 C 50 96, 130 102, 178 98"/>
+  </g></svg>
+
+  <!-- réalisations : l'abri en bois + le podcast -->
+  <svg class="dd" viewBox="0 0 240 190" data-t="2.9" data-l="1334,566,222" data-p="510,1586,250" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="4.4" d="M22 78 L118 22 L214 78"/>
+    <path class="st" stroke-width="2.4" d="M36 70 L118 30 L200 70"/>
+    <path class="st" stroke-width="2" d="M60 58 l-8 6 M84 46 l-8 6 M108 36 l-8 6 M132 40 l8 6 M156 52 l8 6 M180 64 l8 6"/>
+    <path class="st" stroke-width="4" d="M44 74 V164 H192 V74"/>
+    <path class="st" stroke-width="1.8" d="M62 80 V164 M80 74 V164 M152 78 V164 M170 80 V164"/>
+    <path class="st" stroke-width="3.6" d="M98 164 V104 H130 V164"/>
+    <path class="st" stroke-width="2" d="M100 106 L128 162 M128 106 L100 162"/><circle class="fl" cx="124" cy="136" r="2.8"/>
+    <path class="st" stroke-width="3" d="M150 96 H180 V122 H150 Z M165 96 V122 M150 109 H180"/>
+    <path class="st" stroke-width="1.5" d="M178 86 l10 -8 M178 100 l10 -8 M178 114 l10 -8 M178 128 l10 -8 M178 142 l10 -8 M178 156 l10 -8"/>
+    <path class="st" stroke-width="1.5" d="M134 40 l-4 10 M150 49 l-4 10 M166 58 l-4 10 M182 67 l-4 10 M198 76 l-3 7"/>
+    <path class="st" stroke-width="3" d="M8 168 C 60 164, 170 170, 234 166"/>
+    <path class="st" stroke-width="2" d="M22 168 l-4 -9 M29 168 l2 -10 M206 167 l-3 -9 M214 167 l3 -10"/>
+  </g></svg>
+  <svg class="dd" viewBox="0 0 110 130" data-t="3.5" data-l="1478,760,68" data-p="690,1790,80" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" stroke-width="3.2" d="M36 14 C 36 4, 64 4, 64 14 V52 C 64 62, 36 62, 36 52 Z"/>
+    <path class="st" stroke-width="1.8" d="M36 24 H64 M36 34 H64 M36 44 H64"/>
+    <path class="st" stroke-width="2.8" d="M26 40 V52 C 26 72, 74 72, 74 52 V40"/>
+    <path class="st" stroke-width="3" d="M50 70 V100 M32 104 H68"/>
+    <path class="st" stroke-width="2.4" d="M82 24 C 90 30, 90 44, 82 50 M90 16 C 102 26, 102 48, 90 58"/>
+  </g></svg>
+
+  <!-- flèches au feutre (post-it → dessin), paysage uniquement -->
+  <svg class="ink l" viewBox="0 0 1600 900" aria-hidden="true"><g filter="url(#mk)">
+    <path class="st" data-t="3.6" d="M298 258 C 282 272, 268 270, 260 254"/><path class="st" data-t="3.85" d="M251 262 L260 251 L270 259"/>
+    <path class="st" data-t="3.7" d="M1302 150 C 1314 132, 1324 130, 1336 136"/><path class="st" data-t="3.95" d="M1324 128 L1337 136 L1326 146"/>
+    <path class="st" data-t="3.8" d="M298 652 C 288 642, 283 630, 282 616"/><path class="st" data-t="4.05" d="M274 626 L282 614 L291 626"/>
+    <path class="st" data-t="3.9" d="M1304 712 C 1314 722, 1322 722, 1332 716"/><path class="st" data-t="4.15" d="M1321 710 L1333 715 L1326 727"/>
+  </g></svg>
+
+  <!-- ===== fiche centrale ===== -->
+  <header class="it idc" data-id="idc" data-pin="#c4231c" style="--d:.3s"><i class="anchor" data-k="top" data-only="L"></i><i class="anchor bot" data-k="bot"></i>
+    <h1><span>Matthieu</span> <span>Peiffer</span></h1>
+    <svg class="sw" viewBox="0 0 330 20" aria-hidden="true"><path class="st" data-t="2.05" stroke="#c4231c" stroke-width="3.6" fill="none" stroke-linecap="round" d="M6 12 C 80 4, 200 3, 250 8 S 310 15, 324 6"/></svg>
+    <p class="sub">Élève ingénieur généraliste · ICAM Strasbourg-Europe</p>
+    <p class="dates">Stage de 8 semaines<span>du 24 mai au 16 juillet 2027</span></p>
+    <p class="ct"><a href="mailto:matthieu.pfr@gmail.com?subject=Stage%202027">matthieu.pfr@gmail.com</a><a href="tel:+33782847622">07 82 84 76 22</a></p>
+  </header>
+
+  <!-- ===== les quatre post-it ===== -->
+  <button class="it note n-form" data-id="form" data-pin="#2f8f4e" style="--d:.8s" aria-label="Ma formation"><i class="anchor" data-k="main"></i>
+    <div class="paper"><h2>Ma formation</h2>
+      <ul><li>ICAM Strasbourg-Europe</li><li>Un semestre à Ostrava</li><li>TOEIC · WiDaF</li></ul>
+      <span class="go"><b>ouvrir</b><span class="dot"></span></span></div>
+  </button>
+  <button class="it note n-proj" data-id="proj" data-pin="#2c5fc9" style="--d:.95s" aria-label="Mes projets académiques"><i class="anchor" data-k="main"></i>
+    <div class="paper"><h2>Mes projets académiques</h2>
+      <ul><li>Robot bipède · 2e année</li><li>Micromouse · 3e année</li><li>Scan 3D &amp; IA</li></ul>
+      <span class="go"><b>ouvrir</b><span class="dot"></span></span></div>
+  </button>
+  <button class="it note n-exp" data-id="exp" data-pin="#e0a21b" style="--d:1.1s" aria-label="Mes expériences"><i class="anchor" data-k="main"></i>
+    <div class="paper"><h2>Mes expériences</h2>
+      <ul><li>Ma micro-entreprise</li><li>Animateur de colo</li><li>Audits, devis, clients</li></ul>
+      <span class="go"><b>ouvrir</b><span class="dot"></span></span></div>
+  </button>
+  <button class="it note n-real" data-id="real" data-pin="#c4231c" style="--d:1.25s" aria-label="Réalisations personnelles"><i class="anchor" data-k="main"></i>
+    <div class="paper"><h2>Réalisations personnelles</h2>
+      <ul><li>Activités manuelles</li><li>Podcast en radio locale</li><li>Création de sites web</li></ul>
+      <span class="go"><b>ouvrir</b><span class="dot"></span></span></div>
+  </button>
+
+  <canvas id="rope" aria-hidden="true"></canvas>
+</div>
+</div>
+
+<!-- ===== le bureau devant le tableau ===== -->
+<div class="desk" id="desk" aria-hidden="true">
+  <div class="top"></div><div class="edge"></div>
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <filter id="b1"><feGaussianBlur stdDeviation="1.1"/></filter>
+    <filter id="b3"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="b5"><feGaussianBlur stdDeviation="5"/></filter>
+    <!-- tasse -->
+    <linearGradient id="cer" x1="0" x2="1"><stop offset="0" stop-color="#bdb5a8"/><stop offset=".16" stop-color="#e9e4da"/><stop offset=".3" stop-color="#fffefb"/><stop offset=".5" stop-color="#f1ece3"/><stop offset=".82" stop-color="#d3cbbe"/><stop offset="1" stop-color="#a99f90"/></linearGradient>
+    <linearGradient id="inw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9c1b4"/><stop offset="1" stop-color="#f6f2ec"/></linearGradient>
+    <radialGradient id="cof" cx=".45" cy=".45" r=".6"><stop offset="0" stop-color="#8a5a32"/><stop offset=".45" stop-color="#5a3519"/><stop offset="1" stop-color="#2a170a"/></radialGradient>
+    <linearGradient id="hdl" x1="0" x2="1"><stop offset="0" stop-color="#d9d2c6"/><stop offset=".5" stop-color="#fbf9f5"/><stop offset="1" stop-color="#b9b0a2"/></linearGradient>
+    <pattern id="cork" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#c39461"/><circle cx="1.6" cy="2" r=".9" fill="#a0713f"/><circle cx="5" cy="4.6" r=".7" fill="#dcae79"/><circle cx="3.6" cy="6.2" r=".5" fill="#8f6233"/><circle cx="6.2" cy="1.2" r=".5" fill="#a87a47"/></pattern>
+    <clipPath id="mouth"><ellipse cx="62" cy="71" rx="34.5" ry="6.6"/></clipPath>
+    <!-- plante -->
+    <linearGradient id="terra" x1="0" x2="1"><stop offset="0" stop-color="#7a361b"/><stop offset=".22" stop-color="#c06a3f"/><stop offset=".38" stop-color="#d98a5c"/><stop offset=".62" stop-color="#b75e34"/><stop offset="1" stop-color="#6a2e16"/></linearGradient>
+    <linearGradient id="terraR" x1="0" x2="1"><stop offset="0" stop-color="#8a4222"/><stop offset=".3" stop-color="#d6855a"/><stop offset=".45" stop-color="#e79c70"/><stop offset=".7" stop-color="#c06a3f"/><stop offset="1" stop-color="#753519"/></linearGradient>
+    <radialGradient id="soil" cx=".5" cy=".6" r=".6"><stop offset="0" stop-color="#4a3020"/><stop offset="1" stop-color="#1c110a"/></radialGradient>
+    <linearGradient id="leaf" x1="0" x2="1"><stop offset="0" stop-color="#244f2a"/><stop offset=".45" stop-color="#5c9a52"/><stop offset=".6" stop-color="#4c8745"/><stop offset="1" stop-color="#20482a"/></linearGradient>
+    <linearGradient id="leafB" x1="0" x2="1"><stop offset="0" stop-color="#1b3b20"/><stop offset=".5" stop-color="#3f7339"/><stop offset="1" stop-color="#183a1f"/></linearGradient>
+    <!-- feutre -->
+    <linearGradient id="mkBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a707b"/><stop offset=".22" stop-color="#2f333b"/><stop offset=".7" stop-color="#121418"/><stop offset="1" stop-color="#2b2e35"/></linearGradient>
+    <linearGradient id="mkCap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset=".25" stop-color="#d93a30"/><stop offset=".72" stop-color="#9d1d16"/><stop offset="1" stop-color="#c13028"/></linearGradient>
+    <linearGradient id="mkLab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#e9e9ea"/><stop offset=".75" stop-color="#b7b9bd"/><stop offset="1" stop-color="#d6d7da"/></linearGradient>
+    <!-- post-it -->
+    <linearGradient id="pyl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe58c"/><stop offset="1" stop-color="#ffef9e"/></linearGradient>
+    <linearGradient id="pbl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3d6f0"/><stop offset="1" stop-color="#cae4f8"/></linearGradient>
+  </defs></svg>
+
+  <!-- blocs de post-it (le premier feuillet rebique un peu) -->
+  <svg class="obj pads" viewBox="0 0 200 100">
+    <!-- ombre de contact : le bloc est bien posé à plat -->
+    <path d="M26 66 L64 95 L192 80 L152 50 Z" fill="rgba(20,10,0,.42)" filter="url(#b5)"/>
+    <path d="M30 64 L66 90 L184 76 L184 77 L66 91 L30 65 Z" fill="rgba(20,10,0,.55)" filter="url(#b1)"/>
+    <path d="M30 50 L66 76 L66 90 L30 64 Z" fill="#d8b64b"/><path d="M66 76 L184 62 L184 76 L66 90 Z" fill="#ecd067"/>
+    <path d="M30 53 L66 79 L184 65 M30 56 L66 82 L184 68 M30 59 L66 85 L184 71 M30 62 L66 88 L184 74" fill="none" stroke="rgba(140,105,30,.4)" stroke-width=".7"/>
+    <path d="M30 50 L148 36 L184 62 L66 76 Z" fill="url(#pyl)"/>
+    <path d="M30 50 L148 36 L156 42 L38 56 Z" fill="rgba(255,255,255,.18)"/>
+    <!-- coin relevé (il se soulève au survol) -->
+    <g class="flap"><g id="flapW">
+      <path d="M164 64.4 L184 62 L176 56 C 172 60, 168 63, 164 64.4 Z" fill="rgba(80,60,10,.25)" filter="url(#b1)"/>
+      <path d="M164 64.4 C 170 60, 174 55, 175 50 C 178 55, 181 59, 184 62 Z" fill="#fff6c6"/>
+    </g></g>
+    <!-- quelques mots griffonnés -->
+    <path d="M58 58 c4 -2 8 1 12 -1 s8 -2 12 0 s8 -1 10 -2 M60 64 c5 -1 9 1 14 -1 s9 -1 14 -2 M98 50 l2 2 l5 -6" fill="none" stroke="#2c5fc9" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+  </svg>
+
+  <!-- feutre (même rouge que les punaises) -->
+  <svg class="obj marker" viewBox="0 0 220 64">
+    <g transform="rotate(-6 110 46)"><g id="mkRoll">
+      <ellipse cx="112" cy="60" rx="94" ry="6" fill="rgba(20,10,0,.42)" filter="url(#b3)"/>
+      <rect x="20" y="51" width="176" height="4" rx="2" fill="rgba(10,5,0,.6)" filter="url(#b1)"/>
+      <path d="M22 40 L8 45 Q4 47 8 49 L22 54 Z" fill="#30333a"/><path d="M8 45 L2 46.5 Q0 47 2 47.5 L8 49 Z" fill="#141518"/>
+      <rect x="20" y="38" width="130" height="18" rx="5" fill="url(#mkBody)"/>
+      <rect x="44" y="38" width="62" height="18" fill="url(#mkLab)"/>
+      <g id="mkText"><rect x="52" y="44" width="30" height="2.4" rx="1" fill="#1b1d22"/><rect x="52" y="48.5" width="18" height="1.6" rx=".8" fill="#5a5d64"/><rect x="88" y="43" width="12" height="8" rx="1.5" fill="#c4231c"/></g>
+      <rect x="146" y="37.5" width="4" height="19" fill="#9a9ca1"/>
+      <rect x="149" y="36.5" width="54" height="21" rx="7" fill="url(#mkCap)"/>
+      <g id="mkClip"><path d="M156 37 H190 Q194 37 194 34 V32 H158 Q154 32 154 35 Z" fill="#a51f18"/><rect x="158" y="32.6" width="30" height="1.4" rx=".7" fill="rgba(255,255,255,.5)"/></g>
+      <rect x="26" y="40.5" width="120" height="2.6" rx="1.3" fill="rgba(255,255,255,.32)"/><rect x="152" y="39" width="46" height="2.4" rx="1.2" fill="rgba(255,255,255,.4)"/>
+    </g></g>
+  </svg>
+
+  <!-- tasse de café posée sur un sous-verre en liège -->
+  <svg class="obj mug" viewBox="0 0 140 170">
+    <ellipse cx="68" cy="172" rx="64" ry="12" fill="rgba(20,10,0,.5)" filter="url(#b3)"/>
+    <path d="M6 163 V168 A58 11 0 0 0 122 168 V163 Z" fill="#8a5d35"/>
+    <ellipse cx="64" cy="163" rx="58" ry="11" fill="url(#cork)"/>
+    <ellipse cx="64" cy="163" rx="58" ry="11" fill="none" stroke="rgba(255,225,180,.35)" stroke-width="1"/>
+    <ellipse cx="72" cy="161" rx="40" ry="7.5" fill="rgba(25,12,4,.38)" filter="url(#b3)"/>
+    <ellipse cx="62" cy="157.5" rx="35" ry="5.2" fill="rgba(20,10,0,.6)" filter="url(#b1)"/>
+    <!-- anse -->
+    <path d="M100 88 C 130 86, 132 136, 98 138" fill="none" stroke="#b9b0a2" stroke-width="13" stroke-linecap="round"/>
+    <path d="M100 88 C 128 88, 129 134, 99 136" fill="none" stroke="url(#hdl)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M104 92 C 120 93, 122 126, 103 130" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round"/>
+    <!-- corps -->
+    <path d="M23 70 L26 153 A36 6.5 0 0 0 98 153 L101 70 Z" fill="url(#cer)"/>
+    <path d="M36 78 L38.5 148" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".85" filter="url(#b1)"/>
+    <path d="M27 140 A36 6.5 0 0 0 97 140" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="5"/>
+    <!-- logo Icam imprimé (tracés du logo officiel, simplifiés), légèrement resserré par la courbure de la tasse -->
+    <image href="assets/icam-logo.svg" x="35" y="91" width="52.9" height="31.6" preserveAspectRatio="none" opacity=".94"/>
+    <!-- buvant, paroi intérieure, café -->
+    <ellipse cx="62" cy="70" rx="39" ry="8.2" fill="#f7f4ee"/>
+    <ellipse cx="62" cy="71" rx="34.5" ry="6.6" fill="url(#inw)"/>
+    <g clip-path="url(#mouth)"><ellipse cx="62" cy="75.5" rx="33" ry="6.2" fill="url(#cof)"/><ellipse class="glint" cx="54" cy="74" rx="9" ry="1.5" fill="rgba(255,240,220,.35)"/>
+      <g id="ripples"></g></g>
+    <path d="M23.4 71 A39 8.2 0 0 0 100.6 71" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/>
+  </svg>
+  <!-- (la vapeur est dessinée en particules dans le canvas #dust) -->
+
+  <!-- plante (sansevieria) dans un pot en terre cuite -->
+  <svg class="obj plant" viewBox="0 0 130 210">
+    <ellipse cx="74" cy="210" rx="44" ry="9" fill="rgba(20,10,0,.5)" filter="url(#b3)"/>
+    <ellipse cx="65" cy="206" rx="29" ry="5" fill="rgba(20,10,0,.65)" filter="url(#b1)"/>
+    <!-- feuilles du fond -->
+    <g class="lv" style="--k:.75;--sd:6.4s;--sl:-2s"><g stroke="#cdb956" stroke-width="1.3" stroke-linejoin="round">
+      <path d="M56 126 C 40 100, 26 70, 20 30 C 38 62, 52 94, 64 124 Z" fill="url(#leafB)"/></g>
+      <path d="M46 100 q3 -3 7 -1 M38 84 q3 -3 6 -1 M31 66 q3 -3 6 -1 M26 50 q2 -2 5 -1" fill="none" stroke="#173a1c" stroke-width="1.1" stroke-linecap="round" opacity=".45"/></g>
+    <g class="lv" style="--k:.85;--sd:5.6s;--sl:-4s"><g stroke="#cdb956" stroke-width="1.3" stroke-linejoin="round">
+      <path d="M70 126 C 86 100, 100 74, 110 38 C 94 70, 80 98, 62 124 Z" fill="url(#leafB)"/></g>
+      <path d="M78 100 q3 -1 6 2 M86 84 q3 -1 6 2 M94 66 q3 -1 6 2 M101 52 q2 -1 4 2" fill="none" stroke="#173a1c" stroke-width="1.1" stroke-linecap="round" opacity=".45"/></g>
+    <g class="lv" style="--k:1.1;--sd:4.8s;--sl:-1s"><path d="M60 126 C 54 90, 52 50, 63 4 C 72 48, 73 92, 68 126 Z" fill="url(#leaf)" stroke="#cdb956" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M59 108 q4 -2 8 0 M58 92 q5 -2 9 0 M58 76 q5 -2 9 1 M59 60 q4 -2 8 0 M60 44 q3 -2 6 0 M61 28 q2 -1 4 0" fill="none" stroke="#173a1c" stroke-width="1.1" stroke-linecap="round" opacity=".45"/></g>
+    <g class="lv" style="--k:1.35;--sd:4.2s;--sl:-3s"><path d="M58 128 C 42 114, 32 100, 28 80 C 44 94, 56 108, 66 126 Z" fill="url(#leaf)" stroke="#cdb956" stroke-width="1.3" stroke-linejoin="round"/></g>
+    <g class="lv" style="--k:1.25;--sd:5s;--sl:-.5s"><path d="M68 128 C 82 116, 94 104, 102 88 C 86 100, 72 110, 60 126 Z" fill="url(#leaf)" stroke="#cdb956" stroke-width="1.3" stroke-linejoin="round"/></g>
+    <!-- pot -->
+    <path d="M27 136 L37 202 A28 5.5 0 0 0 93 202 L103 136 Z" fill="url(#terra)"/>
+    <path d="M42 140 L48 198" stroke="rgba(255,220,190,.35)" stroke-width="4" stroke-linecap="round" filter="url(#b1)"/>
+    <path d="M22 124 L108 124 L106 140 A41 8 0 0 1 24 140 Z" fill="url(#terraR)"/>
+    <path d="M24 140 A41 8 0 0 0 106 140" fill="none" stroke="rgba(60,20,5,.35)" stroke-width="2"/>
+    <ellipse cx="65" cy="124" rx="43" ry="8.5" fill="#c97448"/>
+    <ellipse cx="65" cy="125.5" rx="38" ry="7" fill="url(#soil)"/>
+    <g fill="#6b4a32"><circle cx="50" cy="126" r="1"/><circle cx="78" cy="127" r="1.2"/><circle cx="70" cy="129" r=".8"/><circle cx="42" cy="124" r=".8"/><circle cx="86" cy="124" r=".9"/></g>
+    <!-- les feuilles sortent de la terre -->
+    <g stroke="#cdb956" stroke-width="1.3"><path d="M60 128 C 60 122, 62 116, 64 112 C 66 116, 68 122, 68 128 Z" fill="url(#leaf)"/></g>
+  </svg>
+</div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="dim" aria-hidden="true"></div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const body=document.body, fit=$('#fit'), stage=$('#stage'), cv=$('#rope'), ctx=cv.getContext('2d'), lightEl=$('#light');
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const DPR=Math.min(2,devicePixelRatio||1);
+  let S=1, P=null, W=1600, H=900, T0=Infinity, awake=240, Z=30;
+
+  /* ---------------- objets épinglés ---------------- */
+  const items=$$('[data-pin]').map(el=>({el,id:el.dataset.id,color:el.dataset.pin,d:parseFloat(el.style.getPropertyValue('--d'))||0,tx:0,ty:0,sw:0,vsw:0,swT:0,anchors:{}}));
+  const byId=id=>items.find(i=>i.id===id);
+  function measure(){ items.forEach(it=>{ const el=it.el; it.x=el.offsetLeft; it.y=el.offsetTop; it.w=el.offsetWidth; it.h=el.offsetHeight;
+    it.r=parseFloat(getComputedStyle(el).getPropertyValue('--r'))||0; it.anchors={};
+    el.querySelectorAll(':scope > .anchor').forEach(a=>{ if(a.dataset.only && a.dataset.only!==(P?'P':'L')) return; it.anchors[a.dataset.k]=[a.offsetLeft,a.offsetTop]; }); }); }
+  /* position réelle d'une punaise (rotation + déplacement compris) */
+  function world(it,k){ const [ax,ay]=it.anchors[k], cx=it.x+it.w/2+it.tx, cy=it.y+it.h/2+it.ty, a=(it.r+it.sw)*Math.PI/180, dx=ax-it.w/2, dy=ay-it.h/2;
+    return [cx+dx*Math.cos(a)-dy*Math.sin(a), cy+dx*Math.sin(a)+dy*Math.cos(a)]; }
+  const pinTime=it=>T0+(it.d+.42)*1000;
+
+  /* ---------------- le fil rouge : vraie corde (intégration de Verlet) ---------------- */
+  const LINKS={L:[['idc','top','form','main'],['idc','top','proj','main'],['idc','bot','exp','main'],['idc','bot','real','main']],
+               P:[['idc','bot','form','main'],['form','main','proj','main'],['proj','main','exp','main'],['exp','main','real','main']]};
+  let ropes=[];
+  class Rope{
+    constructor(a,ka,b,kb,i){ this.A=byId(a); this.ka=ka; this.B=byId(b); this.kb=kb; this.t=Math.max(pinTime(this.A),pinTime(this.B))+120+i*140; this.p=null; }
+    init(){ const [x1,y1]=world(this.A,this.ka),[x2,y2]=world(this.B,this.kb), D=Math.hypot(x2-x1,y2-y1);
+      this.n=Math.max(14,Math.round(D/15)); this.rest=D*1.012/(this.n-1); this.p=[];
+      for(let i=0;i<this.n;i++){ const u=i/(this.n-1), x=x1+(x2-x1)*u, y=y1+(y2-y1)*u-Math.sin(u*Math.PI)*34; this.p.push({x,y,px:x,py:y}); } }
+    step(){ const p=this.p,n=this.n,[x1,y1]=world(this.A,this.ka),[x2,y2]=world(this.B,this.kb);
+      p[0].x=x1;p[0].y=y1;p[n-1].x=x2;p[n-1].y=y2; let m=0;
+      for(let i=1;i<n-1;i++){ const q=p[i], vx=(q.x-q.px)*.983, vy=(q.y-q.py)*.983; q.px=q.x; q.py=q.y; q.x+=vx; q.y+=vy+.33; m+=Math.abs(vx)+Math.abs(vy); }
+      const rest=Math.max(this.rest,Math.hypot(x2-x1,y2-y1)*1.006/(n-1));
+      for(let k=0;k<24;k++) for(let i=0;i<n-1;i++){ const a=p[i],b=p[i+1],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1e-6,f=(d-rest)/d*.5, fa=i===0, fb=i+1===n-1;
+        if(fa){ b.x-=dx*f*2; b.y-=dy*f*2; } else if(fb){ a.x+=dx*f*2; a.y+=dy*f*2; } else { a.x+=dx*f; a.y+=dy*f; b.x-=dx*f; b.y-=dy*f; } }
+      return m; }
+    path(upto){ const p=this.p; ctx.beginPath(); ctx.moveTo(p[0].x,p[0].y);
+      for(let i=1;i<upto;i++){ const mx=(p[i].x+p[i+1].x)/2, my=(p[i].y+p[i+1].y)/2; ctx.quadraticCurveTo(p[i].x,p[i].y,mx,my); }
+      ctx.lineTo(p[upto].x,p[upto].y); }
+  }
+  function buildRopes(){ ropes=LINKS[P?'P':'L'].map((l,i)=>new Rope(l[0],l[1],l[2],l[3],i)); }
+
+  /* ---------------- la lampe (suit la souris) ---------------- */
+  const light={x:0,y:0,tx:0,ty:0};
+  const lightHome=()=>{ light.tx=W*.3; light.ty=-H*.12; };
+  function shadows(){ items.forEach(it=>{ const cx=it.x+it.w/2+it.tx, cy=it.y+it.h/2+it.ty, dx=cx-light.x, dy=cy-light.y, d=Math.hypot(dx,dy)||1, k=Math.min(14,4+d/90);
+      it.el.style.setProperty('--sx',(dx/d*k).toFixed(1)); it.el.style.setProperty('--sy',(dy/d*k+3).toFixed(1)); });
+    lightEl.style.setProperty('--lx',(light.x-16)+'px'); lightEl.style.setProperty('--ly',(light.y-16)+'px'); }
+
+  /* ---------------- rendu ---------------- */
+  function drawPin(x,y,col,s,lx,ly){
+    ctx.save(); ctx.translate(x,y); ctx.scale(s,s);
+    ctx.strokeStyle='rgba(20,20,25,.28)'; ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(lx*11,ly*11+3); ctx.stroke();   // ombre de l'aiguille
+    ctx.fillStyle='rgba(20,20,25,.30)'; ctx.beginPath(); ctx.ellipse(lx*6+1,ly*6+4,10,7,0,0,7); ctx.fill();
+    const g=ctx.createRadialGradient(-3.5,-4,1,0,0,11); g.addColorStop(0,'#fff'); g.addColorStop(.18,col); g.addColorStop(1,shade(col,-.45));
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,10,0,7); ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,.25)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.8)'; ctx.beginPath(); ctx.ellipse(-3.4,-4.2,3.4,2.2,-.5,0,7); ctx.fill();
+    ctx.restore(); }
+  function shade(hex,a){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=n>>8&255,b=n&255; const f=a<0?0:255,t=Math.abs(a); r=Math.round(r+(f-r)*t); g=Math.round(g+(f-g)*t); b=Math.round(b+(f-b)*t); return `rgb(${r},${g},${b})`; }
+
+  function render(now){
+    ctx.clearRect(0,0,W,H);
+    // fils
+    ropes.forEach(r=>{ if(!r.p) return; const f=Math.min(1,(now-r.t)/650), upto=Math.max(1,Math.round(f*(r.n-1)));
+      const mid=r.p[r.n>>1], dx=mid.x-light.x, dy=mid.y-light.y, d=Math.hypot(dx,dy)||1;
+      ctx.save(); ctx.translate(dx/d*6,dy/d*6+4); ctx.strokeStyle='rgba(25,20,15,.22)'; ctx.lineWidth=3.2; ctx.lineCap='round'; ctx.filter='blur(1.6px)'; r.path(upto); ctx.stroke(); ctx.restore();
+      ctx.lineCap='round'; ctx.lineJoin='round';
+      ctx.strokeStyle='#b81e18'; ctx.lineWidth=2.7; r.path(upto); ctx.stroke();
+      ctx.setLineDash([2.6,3.4]); ctx.strokeStyle='rgba(255,170,160,.45)'; ctx.lineWidth=1.1; r.path(upto); ctx.stroke(); ctx.setLineDash([]);
+    });
+    // punaises
+    items.forEach(it=>{ const t=now-pinTime(it); if(t<0) return; const s=t>320?1:1+.7*Math.pow(1-t/320,2)*(t<0?0:1);
+      Object.keys(it.anchors).forEach(k=>{ const [x,y]=world(it,k), dx=x-light.x, dy=y-light.y, d=Math.hypot(dx,dy)||1; drawPin(x,y,it.color,s*(it.press||1),dx/d,dy/d); }); });
+  }
+
+  /* ---------------- boucle : physique à pas fixe ---------------- */
+  let last=performance.now(), acc=0;
+  function frame(now){
+    requestAnimationFrame(frame);
+    acc+=Math.min(50,now-last); last=now;
+    let motion=0;
+    while(acc>=16.67){ acc-=16.67;
+      items.forEach(it=>{ it.vsw+=(it.swT-it.sw)*.12; it.vsw*=.8; it.sw+=it.vsw; it.swT*=.9; if(it.press&&it.press!==1) it.press+=(1-it.press)*.25; motion+=Math.abs(it.vsw); });
+      ropes.forEach(r=>{ if(!r.p && now>=r.t) r.init(); if(r.p) motion+=r.step(); });
+      light.x+=(light.tx-light.x)*.08; light.y+=(light.ty-light.y)*.08; motion+=Math.abs(light.tx-light.x)*.01;
+    }
+    items.forEach(it=>{ it.el.style.setProperty('--tx',it.tx.toFixed(1)+'px'); it.el.style.setProperty('--ty',it.ty.toFixed(1)+'px'); it.el.style.setProperty('--sw',it.sw.toFixed(2)+'deg'); });
+    if(motion>.08 || now<T0+5000) awake=60;
+    if(awake-- > 0){ shadows(); render(now); }
+  }
+
+  /* ---------------- les dessins se tracent au feutre ---------------- */
+  function prepareInk(){ $$('.st').forEach(p=>{ let L=300; try{ L=p.getTotalLength()||300; }catch(e){} p.style.strokeDasharray=L+' '+(L+2); p.style.strokeDashoffset=RM?0:L; p._L=L; });
+    if(!RM) $$('.dd .fl').forEach(f=>f.style.opacity=0); }
+  function drawInk(){ if(RM) return;
+    $$('svg.dd, .sw').forEach(svg=>{ let t=parseFloat(svg.dataset.t||'0')*1000;
+      svg.querySelectorAll('.st').forEach(p=>{ if(p.dataset.t) t=parseFloat(p.dataset.t)*1000; const dur=Math.max(140,p._L/1.5);
+        p.animate([{strokeDashoffset:p._L},{strokeDashoffset:0}],{duration:dur,delay:t,easing:'cubic-bezier(.45,.05,.4,1)',fill:'forwards'}); t+=dur*.9; });
+      svg.querySelectorAll('.fl').forEach(f=>f.animate([{opacity:0},{opacity:1}],{duration:250,delay:t,fill:'forwards'})); });
+    $$('.ink .st').forEach(p=>p.animate([{strokeDashoffset:p._L},{strokeDashoffset:0}],{duration:Math.max(160,p._L/1.2),delay:parseFloat(p.dataset.t)*1000,easing:'ease-out',fill:'forwards'})); }
+
+  /* ---------------- mise à l'échelle ---------------- */
+  function place(){ $$('svg.dd').forEach(s=>{ const v=s.dataset[P?'p':'l']; if(!v){ s.style.display='none'; return; }
+    const [x,y,w]=v.split(',').map(Number); Object.assign(s.style,{display:'',left:x+'px',top:y+'px',width:w+'px'}); }); }
+  function resize(){
+    const vw=innerWidth, vh=innerHeight, nP=vw/vh<.95;
+    if(nP!==P){ P=nP; body.classList.toggle('P',P); body.classList.toggle('L',!P); W=P?800:1600; H=P?1960:900; place();
+      items.forEach(it=>{ it.tx=it.ty=it.sw=it.vsw=it.swT=0; }); measure(); buildRopes(); lightHome(); light.x=light.tx; light.y=light.ty; }
+    else measure();
+    /* le tableau est accroché au mur, la lampe au-dessus, le bureau devant */
+    const desk=$('#desk');
+    if(P){ S=vw*.92/W; desk.style.setProperty('--dh',Math.round(vw*.36)+'px'); fit.style.marginTop=Math.round(90*S+vw*.05)+'px'; }
+    else { const dh=Math.round(Math.max(84,Math.min(200,vh*.17))); desk.style.setProperty('--dh',dh+'px');
+      const top=Math.max(50,vh*.095), avail=vh-dh-top-Math.max(18,vh*.035);
+      S=Math.min(vw*.8/W,avail/H); fit.style.marginTop=(top+(avail-H*S)/2)+'px'; }
+    stage.style.transform=`scale(${S})`;
+    fit.style.width=W*S+'px'; fit.style.height=H*S+'px';
+    cv.width=Math.round(W*S*DPR); cv.height=Math.round(H*S*DPR); cv.style.width=W+'px'; cv.style.height=H+'px';
+    ctx.setTransform(S*DPR,0,0,S*DPR,0,0); awake=60;
+  }
+  let rt; addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(resize,80); });
+
+  /* ---------------- interactions ---------------- */
+  const toStage=e=>{ const r=stage.getBoundingClientRect(); return [(e.clientX-r.left)/S,(e.clientY-r.top)/S]; };
+  let drag=null, prev=null, justDragged=false;
+  stage.addEventListener('pointerdown',e=>{
+    const el=e.target.closest('[data-pin]'); if(!el || e.target.closest('a') || !FINE || body.classList.contains('anim')&&!body.classList.contains('ready')) return;
+    const it=items.find(i=>i.el===el); const [x,y]=toStage(e);
+    drag={it,x0:x,y0:y,tx0:it.tx,ty0:it.ty,moved:false,lx:x}; el.setPointerCapture(e.pointerId); });
+  addEventListener('pointermove',e=>{
+    const [x,y]=toStage(e); awake=60;
+    if(FINE){ light.tx=x; light.ty=Math.min(y,H*.9)-260; }
+    if(drag){ const it=drag.it, dx=x-drag.x0, dy=y-drag.y0;
+      if(!drag.moved && Math.hypot(dx,dy)>5){ drag.moved=true; body.classList.add('dragging'); it.el.classList.add('held');
+        items.forEach(o=>o.el.style.zIndex=''); it.el.style.zIndex=10; it.press=1.25; }   // au-dessus des autres, mais sous le fil
+      if(drag.moved){ it.tx=Math.max(16-it.x,Math.min(W-16-it.x-it.w,drag.tx0+dx)); it.ty=Math.max(16-it.y,Math.min(H-16-it.y-it.h,drag.ty0+dy));
+        it.swT=Math.max(-16,Math.min(16,-(x-drag.lx)*1.3)); drag.lx=x; } }
+    else if(prev){ // on « pince » le fil en passant dessus
+      const vx=x-prev[0], vy=y-prev[1];
+      ropes.forEach(r=>{ if(!r.p) return; for(let i=1;i<r.n-1;i++){ const q=r.p[i]; if(Math.hypot(q.x-x,q.y-y)<18){ q.px-=vx*.55; q.py-=vy*.55; } } }); }
+    prev=[x,y]; });
+  addEventListener('pointerup',()=>{ if(!drag) return; const it=drag.it;
+    if(drag.moved){ justDragged=true; setTimeout(()=>justDragged=false,0); it.press=.82; it.swT=0; it.vsw+=it.sw*-.2; }
+    body.classList.remove('dragging'); it.el.classList.remove('held'); drag=null; awake=120; });
+  addEventListener('pointerleave',()=>{ prev=null; lightHome(); });
+  document.addEventListener('mouseleave',()=>{ prev=null; lightHome(); });
+
+  /* sur mobile, le fil se balance quand on fait défiler la page */
+  let lastY=scrollY;
+  addEventListener('scroll',()=>{ const dy=scrollY-lastY; lastY=scrollY; awake=60;
+    ropes.forEach(r=>{ if(!r.p) return; for(let i=1;i<r.n-1;i++){ const q=r.p[i], u=Math.sin(i/(r.n-1)*Math.PI); q.py-=dy*.05*u; q.px+=dy*.02*u; } }); },{passive:true});
+
+  /* clic sur un post-it : on ouvre sa page (les autres pages arrivent une par une) */
+  const PAGES={form:'formation.html',proj:'projets.html',exp:'experiences.html',real:'realisations.html'};
+  $$('.note').forEach(n=>n.addEventListener('click',e=>{ if(justDragged){ e.preventDefault(); return; }
+    if(PAGES[n.dataset.id]){ location.href=PAGES[n.dataset.id]; return; }
+    n.classList.remove('tap'); void n.offsetWidth; n.classList.add('tap'); const it=items.find(i=>i.el===n); it.vsw+=2.2; awake=90; }));
+
+  /* ---------------- départ ---------------- */
+  resize(); requestAnimationFrame(frame);
+  const fontsReady = document.fonts&&document.fonts.ready ? Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]) : Promise.resolve();
+  fontsReady.then(()=>{ measure(); prepareInk();
+    body.classList.add('lights');                       // la lampe s'allume (petit clignotement), puis tout s'installe
+    setTimeout(()=>requestAnimationFrame(()=>{
+      T0 = RM ? performance.now()-20000 : performance.now();
+      ropes.forEach(r=>r.t=Math.max(pinTime(r.A),pinTime(r.B))+120+ropes.indexOf(r)*140);
+      if(RM){ ropes.forEach(r=>{ r.init(); for(let k=0;k<500;k++) r.step(); }); }
+      body.classList.add('go-in'); drawInk();
+      setTimeout(()=>body.classList.add('ready'), RM?0:3300);
+    }), RM?0:650); });
+})();
+
+/* ================= le bureau vit : courant d'air, vapeur, café, plante, feutre, post-it, poussière ================= */
+(function(){
+  const $=s=>document.querySelector(s), NS='http://www.w3.org/2000/svg';
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const plant=$('.desk .plant'), mug=$('.desk .mug'), marker=$('.desk .marker'), pads=$('.desk .pads');
+  const ripples=$('#ripples'), roll=$('#mkRoll'), mkText=$('#mkText'), mkClip=$('#mkClip'), flapW=$('#flapW');
+  const pw={x:0,v:0}, mk={x:0,v:0};   // petits ressorts amortis
+  let px=-1e4, py=-1e4, pvx=0, pvy=0;
+  const inside=(r,pad)=>px>r.left-pad && px<r.right+pad && py>r.top-pad && py<r.bottom+pad;
+
+  addEventListener('pointermove',e=>{ if(px>-1e4){ pvx=e.clientX-px; pvy=e.clientY-py; } px=e.clientX; py=e.clientY;
+    if(inside(plant.getBoundingClientRect(),10)) pw.v+=Math.max(-3,Math.min(3,pvx))*.12;   // on frôle la plante
+  },{passive:true});
+
+  function ripple(){ if(RM) return; const c=document.createElementNS(NS,'ellipse');
+    Object.entries({cx:56+Math.random()*12,cy:75.5,rx:4,ry:.8,fill:'none',stroke:'rgba(255,236,205,.75)','stroke-width':.8,'vector-effect':'non-scaling-stroke'}).forEach(([k,v])=>c.setAttribute(k,v));
+    c.style.transformBox='fill-box'; c.style.transformOrigin='center'; ripples.appendChild(c);
+    c.animate([{transform:'scale(1)',opacity:.9},{transform:'scale(7.5)',opacity:0}],{duration:1200,easing:'cubic-bezier(.2,.6,.3,1)'}).onfinish=()=>c.remove(); }
+
+  plant.addEventListener('click',()=>{ pw.v+=(Math.random()<.5?-1:1)*6; });
+  mug.addEventListener('pointerenter',ripple);
+  mug.addEventListener('click',()=>{ ripple(); setTimeout(ripple,160); setTimeout(ripple,320); puff=26; });
+  marker.addEventListener('pointerenter',()=>{ mk.v+=(pvy>=0?1:-1)*.045; });
+  marker.addEventListener('click',()=>{ mk.v+=(mk.x>0?-1:1)*.09; });
+  pads.addEventListener('click',()=>{ pads.classList.remove('flut'); void pads.getBoundingClientRect(); pads.classList.add('flut'); });
+
+  /* courant d'air : de temps en temps, une bouffée traverse le bureau de gauche à droite.
+     Le coin du post-it se soulève, puis la vapeur se couche, puis la plante bruisse — dans cet ordre. */
+  let gT0=-1e9, gA=0, gD=2600, gNext=performance.now()+5200;
+  function gust(x,now){ const tau=now-gT0-(x/Math.max(1,W))*1300; if(tau<0||tau>gD) return 0;
+    const s=Math.sin(Math.PI*tau/gD); return gA*s*s*(1+.3*Math.sin(tau*.011)); }
+
+  /* canvas partagé : poussière dans le faisceau de la lampe + vapeur du café */
+  const cv=$('#dust'), cx=cv.getContext('2d'), dpr=Math.min(2,devicePixelRatio||1), bar=$('.lamp .bar');
+  let W=0,H=0; const parts=[], steam=[]; let puff=0;
+  function size(){ W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+  size(); addEventListener('resize',size);
+  const N=matchMedia('(pointer:fine)').matches?60:28;
+  for(let i=0;i<N;i++) parts.push({x:Math.random()*W,y:Math.random()*H,vx:0,vy:0,s:.5+Math.random()*1.7,ph:Math.random()*6.3,sp:.3+Math.random()*.7});
+  // une volute = une tache douce pré-rendue (pas de dégradé recalculé à chaque image)
+  const spr=document.createElement('canvas'); spr.width=spr.height=64;
+  { const g=spr.getContext('2d'), gr=g.createRadialGradient(32,32,0,32,32,32);
+    gr.addColorStop(0,'rgba(255,251,244,1)'); gr.addColorStop(.45,'rgba(255,251,244,.45)'); gr.addColorStop(1,'rgba(255,251,244,0)');
+    g.fillStyle=gr; g.fillRect(0,0,64,64); }
+
+  function step(now){
+    requestAnimationFrame(step);
+    // lectures d'abord (positions), écritures ensuite
+    const mr=mug.getBoundingClientRect(), pr=plant.getBoundingClientRect(), dr=pads.getBoundingClientRect();
+    if(!RM && now>gNext){ gT0=now; gA=.65+Math.random()*.45; gD=2300+Math.random()*1300; gNext=now+gD+6500+Math.random()*7000; }
+    const gp=gust(pr.left+pr.width*.5,now), gf=gust(dr.left+dr.width*.8,now), gs=gust(mr.left+mr.width*.45,now);
+
+    // plante : ressort + bruissement pendant le courant d'air
+    pw.v+=-pw.x*.05+gp*.16+gp*(Math.random()-.5)*.5; pw.v*=.9; pw.x=Math.max(-12,Math.min(12,pw.x+pw.v));
+    plant.style.setProperty('--pw',pw.x.toFixed(2));
+    // coin du post-it soulevé par l'air
+    flapW.setAttribute('transform',gf>.01?`translate(166 64) rotate(${(-gf*15-Math.sin(now*.035)*gf*5).toFixed(2)}) scale(${(1+gf*.22).toFixed(3)}) translate(-166 -64)`:'');
+    // feutre : il roule un peu, puis le clip du capuchon le retient et il revient
+    const lim=.85; mk.v+=-mk.x*.006-(Math.abs(mk.x)>lim?(mk.x-Math.sign(mk.x)*lim)*.3:0); mk.v*=.93; mk.x+=mk.v;
+    roll.setAttribute('transform',`translate(0 ${(mk.x*3.4).toFixed(2)})`);
+    mkText.setAttribute('transform',`translate(0 ${(Math.sin(mk.x)*7).toFixed(2)})`); mkText.setAttribute('opacity',Math.max(0,Math.cos(mk.x*1.3)).toFixed(2));
+    mkClip.setAttribute('transform',`translate(0 ${(Math.sin(mk.x)*10).toFixed(2)})`);
+    pvx*=.85; pvy*=.85;
+    if(RM) return;
+
+    cx.clearRect(0,0,W,H);
+    // --- poussière
+    const b=bar.getBoundingClientRect(), lx=b.left+b.width/2, ly=b.bottom;
+    for(const p of parts){
+      p.ph+=.012*p.sp; p.vx+=Math.cos(p.ph*1.3)*.003+(Math.random()-.5)*.008+gust(p.x,now)*.012; p.vy+=Math.sin(p.ph)*.003-.0012;
+      const dx=p.x-px, dy=p.y-py, d=Math.hypot(dx,dy); if(d<150){ const f=(1-d/150)*.02; p.vx+=pvx*f; p.vy+=pvy*f; }
+      p.vx*=.985; p.vy*=.985; p.x+=p.vx+.04*p.sp; p.y+=p.vy;
+      if(p.x>W+10) p.x=-10; if(p.x<-10) p.x=W+10; if(p.y<-10) p.y=H+10; if(p.y>H+10) p.y=-10;
+      const ry=p.y-ly, w=70+Math.max(0,ry)*.8, rx=p.x-lx;
+      let a = ry<0 ? .04 : .05+.6*Math.exp(-(rx*rx)/(w*w))*Math.max(0,1-ry/(H*.85));
+      a*=.65+.35*Math.sin(p.ph*3);
+      cx.fillStyle=`rgba(255,236,200,${a.toFixed(3)})`; cx.beginPath(); cx.arc(p.x,p.y,p.s,0,6.3); cx.fill();
+    }
+    // --- vapeur : coordonnées dans le repère de la tasse (viewBox 140×170), elle suit la tasse au défilement
+    const k=mr.width/140; if(!(mr.bottom>-200 && mr.top<H+50)) return;
+    const n=(Math.random()<.8?1:0)+(puff>0?2:0); if(puff>0) puff--;
+    for(let i=0;i<n && steam.length<170;i++) steam.push({x:62+(Math.random()-.5)*46,y:72,vx:(Math.random()-.5)*.12,vy:-(.42+Math.random()*.3)*(puff?1.5:1),
+      age:0,L:150+Math.random()*100,s:3+Math.random()*3,ph:Math.random()*6.3});
+    const sway=Math.sin(now*.0007)+.6*Math.sin(now*.0017+1), mx=(px-mr.left)/k, my=(py-mr.top)/k;
+    for(let i=steam.length-1;i>=0;i--){ const p=steam[i];
+      p.age++; if(p.age>p.L){ steam.splice(i,1); continue; }
+      const t=p.age/p.L;
+      p.vx+=Math.sin(p.age*.05+p.ph)*.012*(.4+t)+sway*.004+gs*.04;
+      const dx=p.x-mx, dy=p.y-my, d=Math.hypot(dx,dy); if(d<70){ const f=(1-d/70)*.07; p.vx+=pvx/k*f; p.vy+=pvy/k*f*.5; }
+      p.vx*=.97; p.vy=p.vy*.995-.002; p.x+=p.vx; p.y+=p.vy; p.s+=.11;
+      const a=.2*Math.min(1,p.age/22)*Math.pow(1-t,1.3); if(a<.004) continue;
+      cx.globalAlpha=a; cx.drawImage(spr,mr.left+(p.x-p.s)*k,mr.top+(p.y-p.s)*k,2*p.s*k,2*p.s*k);
+    }
+    cx.globalAlpha=1;
+  }
+  requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>

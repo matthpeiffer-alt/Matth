@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réalisations personnelles — Matthieu Peiffer</title>
+<meta name="description" content="Ce que Matthieu Peiffer fait en dehors des cours : voyages en Europe, activités manuelles, Formule 1, cyclisme, football, randonnée et projets extrascolaires (jeu vidéo sur Godot, roman, podcast, frise chronologique).">
+<meta name="theme-color" content="#F7F6F3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400..900&family=JetBrains+Mono:wght@500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+:root{
+  --bg:#0A0F1C; --bg2:#0E1526; --card:#111A2C; --fg:#EEF2F7; --mut:#8C97AB; --line:rgba(160,180,220,.13);
+  --acc:#3EF0C0; --acc-ink:#03140F; --water:#4DA3FF; --warm:#FFB547;
+  --f:"Inter Tight",system-ui,sans-serif; --m:"JetBrains Mono",ui-monospace,monospace; --s:"Instrument Serif",serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--acc);color:var(--acc-ink)}
+.serif{font-family:var(--s);font-style:italic;font-weight:400;letter-spacing:0}
+.mint{color:var(--acc)} .water{color:var(--water)}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding:0 20px}
+@media(min-width:900px){.wrap{padding:0 48px}}
+.tag{font:700 .7rem var(--f);letter-spacing:.28em;text-transform:uppercase;color:var(--acc)}
+.h2{margin:14px 0 0;font-weight:900;font-size:clamp(2.4rem,6.4vw,5.4rem);line-height:.95;letter-spacing:-.045em}
+
+/* ---------- Grain, progression, curseur ---------- */
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}}
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--acc),var(--water));transform-origin:0 50%;transform:scaleX(0);z-index:100}
+#cursor{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid rgba(255,255,255,.5);border-radius:50%;pointer-events:none;z-index:120;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s;mix-blend-mode:difference;display:none}
+#cursor.big{width:76px;height:76px;margin:-38px 0 0 -38px;background:#fff}
+@media(pointer:fine){#cursor{display:block}}
+#sparks{position:fixed;inset:0;pointer-events:none;z-index:110}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.nav::before{content:"";position:absolute;inset:0;background:linear-gradient(var(--bg),transparent);opacity:.85;pointer-events:none}
+.brand{position:relative;font:800 .95rem var(--f);letter-spacing:-.01em}
+.brand i{font-style:normal;color:var(--acc)}
+.nav-links{position:relative;display:none;gap:4px}
+.nav-links a{font:600 .82rem var(--f);padding:8px 14px;border-radius:99px;color:var(--mut);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--fg);background:rgba(255,255,255,.05)}
+.nav-cta{position:relative;font:700 .78rem var(--f);padding:10px 18px;border-radius:99px;background:var(--acc);color:var(--acc-ink)}
+@media(min-width:900px){.nav{padding:20px 48px}.nav-links{display:flex}}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:99px;font:700 .92rem var(--f);border:1px solid var(--line);color:var(--fg);background:transparent;cursor:pointer;transition:color .4s,border-color .4s}
+.btn::before{content:"";position:absolute;inset:0;background:var(--fg);border-radius:50% 50% 0 0;transform:translateY(100%);transition:transform .5s var(--ease),border-radius .5s}
+.btn:hover::before{transform:none;border-radius:0}
+.btn:hover{color:var(--bg)}
+.btn span{position:relative}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn.primary::before{background:#fff}
+.btn.primary:hover{color:var(--acc-ink)}
+
+:root{--bg:#F7F6F3;--ink:#111111;--mut:#6B6B6B;--trait:rgba(17,17,17,.09);--blanc:#ffffff;--rouge:#EF4444;--red:#E10600;--jaune:#FFD400;--bleu:#2E7DDF;
+  --d:"Anton",Impact,"Arial Narrow",sans-serif;--acc:#EF4444;--acc-ink:#fff}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink)}
+::selection{background:var(--ink);color:var(--bg)}
+.grain{opacity:.035}
+#progress{background:var(--rouge)}
+#dot{position:fixed;top:0;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;pointer-events:none;z-index:120;mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease);display:none}
+#dot.big{width:56px;height:56px;margin:-28px 0 0 -28px}
+@media(pointer:fine){#dot{display:block}}
+.nav::before{display:none}
+.brand,.nav-links,.nav-back{background:rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--trait);border-radius:99px;box-shadow:0 6px 20px -12px rgba(0,0,0,.25)}
+.brand{color:var(--ink);padding:8px 14px}.brand i{color:var(--rouge)}
+.nav-links{padding:3px}
+.nav-links a{color:#555}.nav-links a:hover{color:var(--ink);background:rgba(0,0,0,.05)}
+.nav .right{position:relative;display:flex;gap:8px;align-items:center}
+.nav-back{position:relative;display:inline-flex;align-items:center;gap:8px;font:600 .78rem var(--f);padding:9px 16px;color:var(--ink);transition:background .3s,color .3s}
+.nav-back:hover{background:var(--ink);color:#fff}
+.nav-back svg{width:14px;height:14px}
+.nav-cta{background:var(--ink);color:#fff}
+@media(max-width:520px){.nav-cta{display:none}}
+.ch{display:inline-block;will-change:transform}
+.wd{display:inline-block;white-space:nowrap}
+.wrap{position:relative}
+
+/* ---------- typographie commune ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0;font:600 .8rem var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rouge)}
+.h2{margin:14px 0 0;font:800 clamp(2.3rem,5.4vw,4.6rem)/1.02 var(--f);letter-spacing:-.045em;color:var(--ink)}
+.lead{margin:18px 0 0;font:400 clamp(1.02rem,1.5vw,1.22rem)/1.6 var(--f);color:var(--mut);max-width:56ch}
+.part{position:relative;z-index:1;background:var(--bg);padding:14vh 0 6vh}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+
+/* ---------- haut de page : titre centré + bande de photos inclinées qui défilent ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 16px 44vh}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 50% 20%,rgba(239,68,68,.08),transparent 70%)}
+.tagline{display:inline-block;padding:6px 16px;border:1px solid var(--trait);border-radius:99px;background:rgba(255,255,255,.6);backdrop-filter:blur(6px);font:500 .86rem var(--f);color:var(--mut)}
+.h1{margin:18px 0 0;font:800 clamp(2.6rem,7vw,5.8rem)/1 var(--f);letter-spacing:-.05em}
+.h1 .w{display:inline-block}
+.hdesc{margin:20px auto 0;max-width:34rem;font:400 clamp(1.02rem,1.6vw,1.2rem)/1.55 var(--f);color:var(--mut)}
+.cta{display:inline-block;margin-top:28px;padding:13px 30px;border-radius:99px;background:var(--rouge);color:#fff;font:600 1rem var(--f);box-shadow:0 12px 26px -10px rgba(239,68,68,.7);transition:transform .25s var(--ease),background .25s}
+.cta:hover{transform:scale(1.05);background:#DC2626}
+.marquee{position:absolute;left:0;bottom:0;width:100%;height:46vh;display:flex;align-items:center;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent)}
+.mtrack{display:flex;gap:22px;width:max-content;animation:mq 55s linear infinite}
+@keyframes mq{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mtrack figure{margin:0;flex:none;height:clamp(14rem,34vh,22rem);aspect-ratio:4/5;transform:rotate(var(--r))}
+.mtrack img{width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 18px 36px -16px rgba(0,0,0,.45)}
+@media(max-width:599px){.marquee{height:36vh}.hero{padding-bottom:34vh}.mtrack figure{height:28vh}}
+
+/* ---------- voyages : résumé puis la rangée de pays qui défile à l'horizontale ---------- */
+.hs{position:relative}
+.hs-pin{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+.vhead{position:absolute;left:0;right:0;top:clamp(86px,12vh,120px);z-index:3}
+.hs-row{position:absolute;left:0;bottom:5vh;display:flex;gap:2.4vw;padding:0 8vw;width:max-content;will-change:transform}
+.pc{position:relative;flex:none;height:clamp(230px,42vh,420px);aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#ddd;box-shadow:0 30px 60px -28px rgba(0,0,0,.45)}
+.pc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pc .fl{position:absolute;inset:0;background:var(--flag)}
+.pc .fl::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 30% 20%,rgba(255,255,255,.25),transparent 55%),linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6))}
+.pc .pn{position:absolute;left:18px;right:14px;bottom:16px;z-index:2;font:800 clamp(1.4rem,2.2vw,2.1rem)/1 var(--f);letter-spacing:-.03em;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.45)}
+
+/* ---------- activités manuelles : titre en courbe + rangée d'images courbée ---------- */
+#manuel{padding-bottom:0}
+/* titre incurvé : les lettres sont posées sur l'intérieur d'un cylindre, comme la rangée d'images */
+.cv{position:relative;margin:0 auto;padding:3vh 0;font:800 clamp(2.3rem,5.6vw,5.6rem)/1.1 var(--f);letter-spacing:-.045em;color:var(--ink)}
+.cv .ch{transform-origin:50% 55%}
+.tilt{position:relative;height:clamp(300px,50vh,540px);margin-top:1vh;overflow:hidden;container-type:size}
+.tilt .band{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s}
+.tilt .tile{position:absolute;transform-style:preserve-3d}
+.tilt .sl{position:absolute;top:0;overflow:hidden;background:#ddd}
+.tilt .sl img{position:absolute;top:0;max-width:none;object-fit:cover}
+.tilt .sl.f{border-radius:12px 0 0 12px}.tilt .sl.l{border-radius:0 12px 12px 0}
+.tilt.off .tile{animation-play-state:paused}
+
+/* ---------- les passions : scènes plein écran (section haute, scène collante), transitions en parallaxe ---------- */
+.scene{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;transform-origin:50% 0}
+.stag{position:absolute;left:clamp(16px,4vw,48px);top:clamp(80px,12vh,110px);z-index:6;font:600 .74rem var(--f);letter-spacing:.12em;text-transform:uppercase;padding:7px 13px;border-radius:99px;background:rgba(255,255,255,.8);color:var(--ink);border:1px solid var(--trait);backdrop-filter:blur(8px)}
+.big{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:0;text-align:center;font:400 clamp(4.4rem,17vw,17rem)/.84 var(--d);text-transform:uppercase;letter-spacing:-.005em;pointer-events:none;z-index:1}
+.cap2{position:absolute;left:clamp(16px,4vw,48px);bottom:clamp(22px,5vh,48px);z-index:6;display:flex;align-items:flex-end;margin:0;max-width:calc(100% - 32px);border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+.cap2 .tx{padding:clamp(14px,2vw,22px) clamp(18px,2.4vw,30px)}
+.cap2 small{display:block;font:700 .7rem var(--m);letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.cap2 b{display:block;margin-top:6px;font:400 clamp(1.8rem,4.2vw,3.8rem)/.95 var(--d);text-transform:uppercase}
+.pop{position:absolute;left:calc(50% + var(--x) * 1vw);top:calc(50% + var(--y) * 1vh);z-index:3;width:clamp(150px,21vw,320px);aspect-ratio:4/3;margin:0;transform:translate(-50%,-50%) rotate(var(--r));
+  border:6px solid #fff;border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);background:#ddd}
+.pop img,.rbg img,.wp img,.fphoto img{width:100%;height:100%;object-fit:cover;display:block}
+/* Mes passions → F1 : le titre est découpé dans un voile clair, on zoome dans une lettre jusqu'à l'image de la F1 */
+.sc-f1{height:560vh}
+.sc-f1 .stage{background:var(--bg)}
+.f1frame{position:absolute;inset:0;z-index:1;background:#eee}
+.f1frame svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+#pm{position:absolute;inset:0;z-index:3;width:100%;height:100%;display:block;pointer-events:none}
+#pmo{fill:var(--bg)}
+#pml text{fill:none;stroke:var(--ink);stroke-width:2.5px;vector-effect:non-scaling-stroke}
+.driver{background:var(--red);color:#fff}
+.driver img{display:block;height:clamp(150px,30vh,290px);width:auto;flex:none}
+.f1hint{position:absolute;right:clamp(16px,4vw,48px);bottom:clamp(22px,5vh,48px);z-index:6;font:600 .72rem var(--f);letter-spacing:.06em;background:#121212;color:#fff;padding:8px 13px;border-radius:99px}
+/* Tour de France */
+.sc-tdf{height:330vh}
+.sc-tdf .stage{background:var(--jaune)}
+.riders{background:#121212;color:var(--jaune)}
+/* Football : tableau tactique à la craie, puis la photo du Racing */
+.sc-foot{height:480vh}
+.sc-foot .stage{background:radial-gradient(120% 90% at 50% 40%,#2c6b4b,#1a4630 70%,#123323);color:#fff}
+.sc-foot .stage::before{content:"";position:absolute;inset:0;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.board{position:absolute;inset:clamp(70px,11vh,110px) clamp(10px,3vw,40px) clamp(20px,4vh,40px);z-index:2}
+.board svg{width:100%;height:100%;display:block;overflow:visible}
+.board .ln{fill:none;stroke:rgba(255,255,255,.82);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;vector-effect:non-scaling-stroke}
+.board .ps{fill:none;stroke:#FFE9A8;stroke-width:5;stroke-linecap:round;stroke-dasharray:1 1;vector-effect:non-scaling-stroke}
+.board .us circle{fill:rgba(255,255,255,.08);stroke:#fff;stroke-width:5}
+.board .them path{stroke:#FF9F86;stroke-width:6;stroke-linecap:round}
+.board .us,.board .them{transform-box:fill-box;transform-origin:50% 50%}
+#fball{filter:drop-shadow(0 6px 6px rgba(0,0,0,.45))}
+.but{position:absolute;left:50%;top:44%;z-index:5;margin:0;transform:translate(-50%,-50%) rotate(-8deg);font:400 clamp(5rem,20vw,19rem)/.8 var(--d);color:#fff;text-shadow:0 10px 0 rgba(0,0,0,.25);pointer-events:none;opacity:0}
+.fphoto{position:absolute;inset:0;z-index:4;opacity:0;overflow:hidden}
+.fphoto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 40%,rgba(0,0,0,.45))}
+.ftitle{position:absolute;right:clamp(16px,4vw,48px);top:clamp(76px,11.5vh,104px);z-index:6;margin:0;font:400 clamp(2.2rem,5vw,4.4rem)/1 var(--d);color:#fff;text-transform:uppercase}
+.foot-cap{background:#fff;color:#121212}
+/* Randonnée : quatre étapes le long d'un sentier balisé */
+.sc-rando{height:420vh}
+.sc-rando .stage{background:#16324f;color:#fff}
+.rbg{position:absolute;inset:0;z-index:0}
+.rbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 35%,transparent 60%,rgba(0,0,0,.5))}
+.rbg.b2{opacity:0}
+.sc-rando .big{color:#fff;top:24%;text-shadow:0 10px 40px rgba(0,0,0,.35)}
+.trail{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible}
+.trail .t1{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;stroke-dasharray:1 1;vector-effect:non-scaling-stroke}
+.trail .t2{fill:none;stroke:var(--red);stroke-width:7;stroke-dasharray:14 22;vector-effect:non-scaling-stroke}
+.wp{position:absolute;z-index:4;left:var(--wx,30%);top:var(--wy,55%);width:clamp(160px,17vw,260px);transform:translate(-50%,-50%);background:#fff;color:#121212;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -16px rgba(0,0,0,.6)}
+.wp img{aspect-ratio:16/10;height:auto;object-position:60% 45%}
+.wp p{margin:0;padding:9px 11px 11px;font:800 clamp(.82rem,1.1vw,1rem)/1.25 var(--f)}
+.wp small{display:flex;align-items:center;gap:8px;font:700 .58rem var(--m);letter-spacing:.14em;text-transform:uppercase;color:#666;margin-bottom:4px}
+.wp small::before{content:"";width:22px;height:9px;background:linear-gradient(180deg,#fff 0 50%,var(--red) 0);border:1px solid #ccc}
+
+/* ---------- projets extrascolaires ---------- */
+.card{position:relative;border:1px solid var(--trait);border-radius:24px;background:var(--blanc);overflow:hidden;box-shadow:0 24px 50px -34px rgba(0,0,0,.35);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.card:hover{transform:translateY(-4px);box-shadow:0 34px 60px -34px rgba(0,0,0,.45)}
+.pgame{display:grid;gap:clamp(14px,1.6vw,20px);margin-top:5vh}
+@media(min-width:900px){.pgame{grid-template-columns:1.5fr 1fr}}
+.vid video{display:block;width:100%;height:100%;aspect-ratio:16/9;object-fit:cover}
+.gtext{padding:clamp(22px,2.6vw,36px);display:flex;flex-direction:column;justify-content:center}
+.gtext h3{margin:0;font:800 clamp(1.6rem,2.6vw,2.3rem)/1.08 var(--f);letter-spacing:-.035em}
+.gtext ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.gtext li{display:flex;gap:12px;font:400 clamp(1rem,1.2vw,1.08rem)/1.5 var(--f);color:#444}
+.gtext li::before{content:"";flex:none;width:7px;height:7px;margin-top:9px;border-radius:50%;background:var(--rouge)}
+.pgroup{margin-top:clamp(14px,1.6vw,20px)}
+.pg-grid{display:grid}
+@media(min-width:900px){.pg-grid{grid-template-columns:repeat(3,1fr)}}
+.pg-item{padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--trait)}
+@media(min-width:900px){.pg-item{border-bottom:0;border-right:1px solid var(--trait)}.pg-item:last-child{border-right:0}}
+.pg-item h4{margin:0;font:700 .78rem var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.pg-item p{margin:0;font:600 clamp(1.02rem,1.3vw,1.15rem)/1.45 var(--f);color:var(--ink)}
+.live{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font:600 .66rem var(--f);letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:rgba(239,68,68,.1);color:#DC2626}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--rouge);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.tw{font:600 clamp(1.02rem,1.3vw,1.15rem)/1.45 "Courier New",Courier,monospace!important;min-height:2.9em}
+.tw::after{content:"▍";color:var(--rouge);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#wave{width:100%;height:46px;display:block}
+/* un petit site d'exemple dans une fenêtre de navigateur, qui défile tout seul */
+.site{border:1px solid var(--trait);border-radius:12px;background:#fff;overflow:hidden;max-width:260px;box-shadow:0 16px 30px -22px rgba(0,0,0,.5)}
+.site .bar{display:flex;align-items:center;gap:5px;padding:7px 9px;background:#f3f3f3;border-bottom:1px solid var(--trait)}.site .bar i{width:7px;height:7px;border-radius:50%;background:#d0d0d0}
+.site .bar i:nth-child(1){background:#ff5f57}.site .bar i:nth-child(2){background:#febc2e}.site .bar i:nth-child(3){background:#28c840}
+.site .bar b{flex:1;height:12px;margin-left:8px;border-radius:99px;background:#e4e4e4}
+.site .vp{height:78px;overflow:hidden;position:relative}
+.site .pg{animation:sscroll 8s cubic-bezier(.65,0,.35,1) infinite alternate}
+@keyframes sscroll{0%,12%{transform:translateY(0)}88%,100%{transform:translateY(calc(78px - 100%))}}
+.site nav{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;font:800 .5rem var(--f)}
+.site nav span{display:flex;gap:6px;font:500 .4rem var(--f);color:#777}
+.site .sh{position:relative;height:62px;margin:0 6px;border-radius:6px;overflow:hidden;color:#fff}
+.site .sh img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.site .sh::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.6),transparent 75%)}
+.site .sh p{position:absolute;left:8px;bottom:7px;z-index:1;margin:0;font:800 .62rem/1.05 var(--f)!important;color:#fff!important;letter-spacing:-.02em}
+.site .sh p i{display:inline-block;margin-top:4px;font:600 .36rem var(--f);font-style:normal;padding:3px 6px;border-radius:99px;background:var(--rouge)}
+.site .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px}
+.site .cards div{border-radius:4px;overflow:hidden;background:#f2f2f2}
+.site .cards img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.site .cards u{display:block;height:4px;margin:4px;border-radius:9px;background:#ddd;text-decoration:none}
+.site .ft{margin:2px 6px 6px;height:22px;border-radius:4px;background:#151515}
+/* grandes avancées de l'humanité : fond clair comme le reste du bloc, le texte au centre,
+   les photos encadrées autour à différentes profondeurs (les plus proches sont plus grandes, plus ombrées, bougent plus) */
+.frise{position:relative;border-top:1px solid var(--trait);height:clamp(520px,46vw,640px);overflow:hidden;
+  background:radial-gradient(60% 55% at 50% 50%,#fff,transparent 70%),radial-gradient(circle,rgba(17,17,17,.09) 1px,transparent 1.4px) 0 0/22px 22px,#F4F2EE}
+.hp{position:absolute;left:var(--x);top:var(--y);z-index:calc(1 + var(--z) * 10);width:calc(clamp(112px,11vw,158px) * (.78 + .44 * var(--z)));margin:0;transform:translate(-50%,-50%) rotate(var(--r))}
+.hp .in{background:#fff;padding:6px 6px 0;border-radius:6px;animation:flt 6s ease-in-out infinite alternate;
+  box-shadow:0 1px 2px rgba(0,0,0,.08),0 calc(8px + 26px * var(--z)) calc(16px + 36px * var(--z)) calc(-8px - 6px * var(--z)) rgba(30,20,10,calc(.18 + .28 * var(--z)))}
+.hp:nth-child(odd) .in{animation-delay:-3s}
+@keyframes flt{to{transform:translateY(-7px)}}
+.hp img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 35%;border-radius:3px}
+.hp figcaption{padding:6px 2px 8px;font:700 .68rem/1.25 var(--f);color:#151515}
+.hp small{display:block;font:700 .54rem var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--rouge);margin-bottom:2px}
+.fcap{position:absolute;left:50%;top:50%;z-index:20;transform:translate(-50%,-50%);width:min(30ch,70%);text-align:center;color:var(--ink)}
+.fcap b{display:block;font:800 clamp(4.4rem,9vw,7.4rem)/.85 var(--f);letter-spacing:-.06em}
+.fcap span{display:block;margin-top:12px;font:500 clamp(.98rem,1.3vw,1.12rem)/1.45 var(--f);color:#444}
+@media(max-width:599px){.frise{height:780px}.hp{left:var(--mx);top:var(--my);width:calc(29vw * (.85 + .3 * var(--z)))}.hp figcaption{font-size:.6rem}.fcap{width:84%;top:47%}}
+
+/* ---------- fin : la même carte que sur les autres pages ---------- */
+.end{position:relative;z-index:1;background:var(--bg);padding:12vh 0 8vh}
+/* bleu nuit, plus doux et posé dans un liseré blanc : la même carte que sur les autres pages (outils/clair.css) */
+.ncard{--bg:#121B30;position:relative;overflow:hidden;margin-top:3vh;border:1px solid transparent;border-radius:36px;background:radial-gradient(120% 100% at 50% 0%,#22304F,#121B30 70%);color:var(--fg);padding:clamp(40px,7vw,90px) clamp(22px,5vw,60px);text-align:center;
+  box-shadow:0 0 0 8px #fff,0 0 0 9px rgba(17,17,17,.07),0 50px 90px -50px rgba(18,27,48,.55)}
+.ncard .aura2{position:absolute;left:50%;bottom:-70%;width:90%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(249,201,180,.2),transparent 62%)}
+.ncard .h2{position:relative;margin:0;font:900 clamp(2.2rem,5vw,4.2rem)/.95 var(--f);letter-spacing:-.045em;color:var(--fg)}
+.ncard .serif{color:#F9C9B4}
+.ncard .cta-row{position:relative;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
+.btn.primary{background:#F9C9B4;border-color:#F9C9B4;color:#2A0F08}.btn.primary::before{background:#fff}
+footer{position:relative;z-index:1;background:var(--bg);border-top:1px solid var(--trait);padding:22px 20px 30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font:500 .74rem var(--f);color:var(--mut)}
+footer a:hover{color:var(--ink)}
+footer .cr{flex-basis:100%;font-size:.68rem;color:#999}
+@media(min-width:900px){footer{padding:22px 48px 30px}}
+@media(max-width:599px){.pop{width:44vw;border-width:4px}.wp{width:45vw}.wp img{aspect-ratio:2.2/1}.driver img{height:22vh}.f1hint{bottom:auto;right:auto;left:16px;top:calc(clamp(80px,12vh,110px) + 44px)}
+  .ftitle{right:auto;left:16px;top:calc(clamp(80px,12vh,110px) + 40px)}.board{top:calc(clamp(80px,12vh,110px) + 100px)}.pc{height:38vh}.hs-row{bottom:4vh}}
+
+/* sans animations */
+.no-fx .scene{height:auto}.no-fx .stage{position:relative;height:100vh}
+.no-fx .hs-pin{height:auto;padding:0 0 4vh}.no-fx .vhead{position:relative;top:auto;padding-top:120px}.no-fx .hs-row{position:relative;bottom:auto;margin-top:4vh;max-width:100vw;overflow-x:auto}
+.no-fx #pm{display:none}
+@media(prefers-reduced-motion:reduce){.grain,.live i,.tw::after,.mini .body i,.mtrack{animation:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div id="progress"></div>
+<div id="dot"></div>
+
+<nav class="nav">
+  <a class="brand" href="tableau.html">Matthieu Peiffer<i>.</i></a>
+  <div class="nav-links">
+    <a href="#voyages" data-scroll>Voyages</a>
+    <a href="#manuel" data-scroll>Manuel</a>
+    <a href="#passions" data-scroll>Passions</a>
+    <a href="#projets" data-scroll>Projets</a>
+  </div>
+  <div class="right">
+    <a class="nav-back" href="tableau.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H3M7 3 2 8l5 5"/></svg><span>Le tableau</span></a>
+    <a class="nav-cta" href="mailto:matthieu.pfr@gmail.com?subject=Stage%20de%208%20semaines%20-%20mai%202027">Me contacter</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="top">
+  <span class="tagline">Réalisations personnelles</span>
+  <h1 class="h1"><span class="w">Ce</span> <span class="w">que</span> <span class="w">je</span> <span class="w">fais</span><br><span class="w">en</span> <span class="w">dehors</span> <span class="w">des</span> <span class="w">cours.</span></h1>
+  <p class="hdesc">Voyages, activités manuelles, sport et projets extrascolaires.</p>
+  <a class="cta" href="#voyages" data-scroll>Découvrir</a>
+  <div class="marquee" aria-hidden="true"><div class="mtrack"><figure style="--r:-2deg"><img src="assets/f1-carrosserie.jpg" alt="Une Formule 1" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1775638946697-fb4b8bb1dc88?auto=format&fit=crop&w=600&q=70" alt="Le peloton du Tour de France" decoding="async"></figure><figure style="--r:-2deg"><img src="assets/foot-stade.jpg" alt="Le Racing Club de Strasbourg" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1752608585554-80456562f509?auto=format&fit=crop&w=600&q=70" alt="Un lac de montagne" decoding="async"></figure><figure style="--r:-2deg"><img src="https://images.unsplash.com/photo-1570793005386-840846445fed?auto=format&fit=crop&w=600&q=70" alt="Une cabane en bois" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1725522149699-ab14bd6f2c22?auto=format&fit=crop&w=600&q=70" alt="Les gorges du Verdon" decoding="async"></figure><figure style="--r:-2deg"><img src="assets/f1-carrosserie.jpg" aria-hidden="true" alt="Une Formule 1" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1775638946697-fb4b8bb1dc88?auto=format&fit=crop&w=600&q=70" aria-hidden="true" alt="Le peloton du Tour de France" decoding="async"></figure><figure style="--r:-2deg"><img src="assets/foot-stade.jpg" aria-hidden="true" alt="Le Racing Club de Strasbourg" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1752608585554-80456562f509?auto=format&fit=crop&w=600&q=70" aria-hidden="true" alt="Un lac de montagne" decoding="async"></figure><figure style="--r:-2deg"><img src="https://images.unsplash.com/photo-1570793005386-840846445fed?auto=format&fit=crop&w=600&q=70" aria-hidden="true" alt="Une cabane en bois" decoding="async"></figure><figure style="--r:5deg"><img src="https://images.unsplash.com/photo-1725522149699-ab14bd6f2c22?auto=format&fit=crop&w=600&q=70" aria-hidden="true" alt="Les gorges du Verdon" decoding="async"></figure></div></div>
+</header>
+
+<section id="voyages">
+  <div class="hs" id="hs">
+    <div class="hs-pin">
+      <div class="vhead wrap">
+        <p class="eyebrow">Voyages</p>
+        <h2 class="h2">J'ai beaucoup voyagé.</h2>
+        <p class="lead">J'ai visité plus de dix pays d'Europe, le plus souvent avec mes parents. J'apprécie particulièrement les voyages culturels : visiter des églises et des musées, découvrir de nouveaux paysages.</p>
+      </div>
+      <div class="hs-row" id="hs-row"><div class="pc"><span class="fl" style="--flag:linear-gradient(90deg,#111 0 33.3%,#FDDA24 0 66.6%,#EF3340 0)"></span><span class="pn">Belgique</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#EA141D 0 33.3%,#fff 0 66.6%,#51ADDA 0)"></span><span class="pn">Luxembourg</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#111 0 33.3%,#DD0000 0 66.6%,#FFCE00 0)"></span><span class="pn">Allemagne</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(#fff,#fff) center/13% 46% no-repeat,linear-gradient(#fff,#fff) center/46% 13% no-repeat,#DA291C"></span><span class="pn">Suisse</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(90deg,#009246 0 33.3%,#fff 0 66.6%,#CE2B37 0)"></span><span class="pn">Italie</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#AA151B 0 25%,#F1BF00 0 75%,#AA151B 0)"></span><span class="pn">Espagne</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(90deg,#046A38 0 40%,#DA291C 0)"></span><span class="pn">Portugal</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(118deg,#11457E 0 34%,transparent 0),linear-gradient(180deg,#fff 0 50%,#D7141A 0)"></span><span class="pn">République tchèque</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#C8102E 0 33.3%,#fff 0 66.6%,#C8102E 0)"></span><span class="pn">Autriche</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#fff 0 33.3%,#005DA4 0 66.6%,#ED1C24 0)"></span><span class="pn">Slovénie</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(180deg,#FF0000 0 33.3%,#fff 0 66.6%,#171796 0)"></span><span class="pn">Croatie</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(112deg,#002395 0 42%,#FECB00 0 68%,#002395 0)"></span><span class="pn">Bosnie</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(#C40308,#C40308) center/86% 88% no-repeat,#D4AF37"></span><span class="pn">Monténégro</span></div><div class="pc"><span class="fl" style="--flag:linear-gradient(90deg,#0055A4 0 33.3%,#fff 0 66.6%,#EF4135 0)"></span><span class="pn">France</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="manuel">
+  <div class="wrap center">
+    <h2 class="cv" id="cv" aria-label="Mes activités manuelles"><span class="wd"><span class="ch">M</span><span class="ch">e</span><span class="ch">s</span></span> <span class="wd"><span class="ch">a</span><span class="ch">c</span><span class="ch">t</span><span class="ch">i</span><span class="ch">v</span><span class="ch">i</span><span class="ch">t</span><span class="ch">é</span><span class="ch">s</span></span> <span class="wd"><span class="ch">m</span><span class="ch">a</span><span class="ch">n</span><span class="ch">u</span><span class="ch">e</span><span class="ch">l</span><span class="ch">l</span><span class="ch">e</span><span class="ch">s</span></span></h2>
+    <p class="lead">Depuis l'enfance, chez mes grands-parents à la campagne, j'ai appris à manier différents outils : perceuse, tronçonneuse, hache. J'ai participé à la coupe du bois et réalisé des cabanes ainsi que des rampes de skate.</p>
+  </div>
+  <div class="tilt" id="tilt" data-imgs="[{&quot;src&quot;: &quot;https://images.unsplash.com/photo-1788296817269-8df0458ab799?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Outils sur un \u00e9tabli&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1547408133-ae738478d78c?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Une hache sur une b\u00fbche&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1570793005386-840846445fed?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Une cabane en bois&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1779031242515-205111711b23?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Travail du bois \u00e0 l&#x27;atelier&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1683806904728-e5a2b9341da7?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Une rampe de skate&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1634756455420-00bfd92600b8?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Du bois coup\u00e9&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1659930087003-2d64e33181f7?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Tracer une coupe sur une planche&quot;}, {&quot;src&quot;: &quot;https://images.unsplash.com/photo-1520796738119-1bae68104970?auto=format&amp;fit=crop&amp;w=900&amp;q=70&quot;, &quot;alt&quot;: &quot;Des rampes de skate&quot;}]"><div class="band"></div></div>
+</section>
+
+<section class="scene sc-f1" id="passions">
+  <div class="stage" id="f1stage">
+    <div class="f1frame" id="f1frame">
+      <svg id="xr" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Une Formule 1 : sous la carrosserie, la mécanique apparaît">
+        <defs>
+          <filter id="liq" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+            <feTurbulence id="xt" type="fractalNoise" baseFrequency="0.018 0.025" numOctaves="3" seed="2" result="n"/>
+            <feDisplacementMap id="xd" in="SourceGraphic" in2="n" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <mask id="xm" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><rect width="1672" height="941" fill="#000"/><circle id="xc" cx="836" cy="520" r="0" fill="#fff" filter="url(#liq)"/></mask>
+        </defs>
+        <g id="car"><image data-src="assets/f1-carrosserie.jpg" width="1672" height="941"/><image data-src="assets/f1-mecanique.jpg" width="1672" height="941" mask="url(#xm)"/></g>
+      </svg>
+    </div>
+    <svg id="pm" aria-label="Mes passions">
+      <defs><mask id="pmk" maskUnits="userSpaceOnUse"><rect id="pmr" x="0" y="0" width="100" height="100" fill="#fff"/><g id="pmz"><g id="pmi"></g></g></mask></defs>
+      <rect id="pmo" x="0" y="0" width="100" height="100" mask="url(#pmk)"/>
+      <g id="pmz2"><g id="pml"></g></g>
+    </svg>
+    <span class="stag" id="pstag">Passion · Formule 1</span>
+    <div class="cap2 driver" id="driver"><img src="assets/leclerc.jpg" alt="Charles Leclerc" loading="lazy" decoding="async"><div class="tx"><small>Pilote préféré</small><b>Charles Leclerc</b></div></div>
+    <span class="f1hint" id="f1hint">Passe la souris : sous la carrosserie</span>
+  </div>
+</section>
+
+<section class="scene sc-tdf" id="sc-tdf">
+  <div class="stage">
+    <span class="stag">Passion · Cyclisme</span>
+    <p class="big" aria-hidden="true"><span class="wd"><span class="ch">T</span><span class="ch">O</span><span class="ch">U</span><span class="ch">R</span></span> <span class="wd"><span class="ch">D</span><span class="ch">E</span></span><br><span class="wd"><span class="ch">F</span><span class="ch">R</span><span class="ch">A</span><span class="ch">N</span><span class="ch">C</span><span class="ch">E</span></span></p>
+    <figure class="pop" style="--x:-33;--y:-27;--r:-8deg"><img src="https://images.unsplash.com/photo-1785943897599-d190e586ed13?auto=format&fit=crop&w=900&q=70" alt="Les coureurs passent sous une arche" loading="lazy" decoding="async"></figure><figure class="pop" style="--x:31;--y:-29;--r:6deg"><img src="https://images.unsplash.com/photo-1784729222106-bd495a2b3921?auto=format&fit=crop&w=900&q=70" alt="Le public dans la montagne" loading="lazy" decoding="async"></figure><figure class="pop" style="--x:-36;--y:25;--r:5deg"><img src="https://images.unsplash.com/photo-1758300672856-56ae203cefc6?auto=format&fit=crop&w=900&q=70" alt="Une course cycliste professionnelle" loading="lazy" decoding="async"></figure><figure class="pop" style="--x:33;--y:26;--r:-6deg"><img src="https://images.unsplash.com/photo-1775638946697-fb4b8bb1dc88?auto=format&fit=crop&w=900&q=70" alt="Le peloton lancé" loading="lazy" decoding="async"></figure><figure class="pop" style="--x:-4;--y:-40;--r:3deg"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=70" alt="Un groupe de coureurs" loading="lazy" decoding="async"></figure><figure class="pop" style="--x:3;--y:38;--r:-4deg"><img src="https://images.unsplash.com/photo-1775476792584-35bb103e097a?auto=format&fit=crop&w=900&q=70" alt="Le drapeau français au bord de la route" loading="lazy" decoding="async"></figure>
+    <div class="cap2 riders"><div class="tx"><small>Mes cyclistes préférés</small><b>Paul Seixas &amp; Mathieu van der Poel</b></div></div>
+  </div>
+</section>
+
+<section class="scene sc-foot" id="sc-foot">
+  <div class="stage">
+    <span class="stag">Passion · Football</span>
+    <p class="ftitle" aria-hidden="true"><span class="wd"><span class="ch">F</span><span class="ch">O</span><span class="ch">O</span><span class="ch">T</span><span class="ch">B</span><span class="ch">A</span><span class="ch">L</span><span class="ch">L</span></span></p>
+    <div class="board"><svg id="board" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-label="Un tableau tactique : les passes s'enchaînent jusqu'au but"><g id="bg"><path class="ln" pathLength="1" d="M80 80 H1520 V820 H80 Z"/><path class="ln" pathLength="1" d="M800 80 V820"/><path class="ln" pathLength="1" d="M690 450 A110 110 0 1 0 910 450 A110 110 0 1 0 690 450"/><path class="ln" pathLength="1" d="M1520 250 H1310 V650 H1520"/><path class="ln" pathLength="1" d="M1520 350 H1440 V550 H1520"/><path class="ln" pathLength="1" d="M1310 385 A88 88 0 0 0 1310 515"/><path class="ln" pathLength="1" d="M80 250 H290 V650 H80"/><path class="ln" pathLength="1" d="M80 350 H160 V550 H80"/><path class="ln" pathLength="1" d="M290 385 A88 88 0 0 1 290 515"/><circle cx="1400" cy="450" r="6" fill="#fff"/><circle cx="800" cy="450" r="6" fill="#fff"/><path class="ln" pathLength="1" d="M1520 400 H1568 V500 H1520"/><g id="net" stroke="rgba(255,255,255,.5)" stroke-width="2"><path d="M1530 400 V500"/><path d="M1540 400 V500"/><path d="M1550 400 V500"/><path d="M1560 400 V500"/><path d="M1520 412 H1568"/><path d="M1520 424 H1568"/><path d="M1520 436 H1568"/><path d="M1520 448 H1568"/><path d="M1520 460 H1568"/><path d="M1520 472 H1568"/><path d="M1520 484 H1568"/><path d="M1520 496 H1568"/></g><path class="ps" pathLength="1" d="M300 610 Q376 406 560 290"/><path class="ps" pathLength="1" d="M560 290 Q658 506 860 630"/><path class="ps" pathLength="1" d="M860 630 Q936 426 1120 310"/><path class="ps" pathLength="1" d="M1120 310 Q1188 467 1350 520"/><path class="ps" pathLength="1" d="M1350 520 Q1434 443 1548 440"/><g class="them" transform="translate(470 440)"><path d="M-17 -17 L17 17 M17 -17 L-17 17"/></g><g class="them" transform="translate(720 470)"><path d="M-17 -17 L17 17 M17 -17 L-17 17"/></g><g class="them" transform="translate(990 450)"><path d="M-17 -17 L17 17 M17 -17 L-17 17"/></g><g class="them" transform="translate(1240 420)"><path d="M-17 -17 L17 17 M17 -17 L-17 17"/></g><g class="them" transform="translate(1505 455)"><path d="M-17 -17 L17 17 M17 -17 L-17 17"/></g><g class="us" transform="translate(300 610)"><circle r="24"/></g><g class="us" transform="translate(560 290)"><circle r="24"/></g><g class="us" transform="translate(860 630)"><circle r="24"/></g><g class="us" transform="translate(1120 310)"><circle r="24"/></g><g class="us" transform="translate(1350 520)"><circle r="24"/></g><circle id="fball" cx="300" cy="610" r="13" fill="#fff" stroke="#121212" stroke-width="3"/><circle id="goalpt" cx="1548" cy="440" r="1" fill="none"/></g></svg></div>
+    <p class="but" aria-hidden="true">BUT !</p>
+    <div class="fphoto"><img src="assets/foot-stade.jpg" alt="Les joueurs du Racing fêtent un but devant leurs supporters" loading="lazy" decoding="async"></div>
+    <div class="cap2 foot-cap"><div class="tx"><small>Football</small><b>Une passion depuis l'enfance</b></div></div>
+  </div>
+</section>
+
+<section class="scene sc-rando" id="sc-rando">
+  <div class="stage">
+    <div class="rbg b1"><img src="https://images.unsplash.com/photo-1752608585554-80456562f509?auto=format&fit=crop&w=1800&q=70" alt="Un lac de montagne face aux sommets" loading="lazy" decoding="async"></div><div class="rbg b2"><img src="https://images.unsplash.com/photo-1725522149699-ab14bd6f2c22?auto=format&fit=crop&w=1800&q=70" alt="Une rivière au fond des gorges du Verdon" loading="lazy" decoding="async"></div>
+    <span class="stag">Passion · Randonnée</span>
+    <p class="big" aria-hidden="true"><span class="wd"><span class="ch">R</span><span class="ch">A</span><span class="ch">N</span><span class="ch">D</span><span class="ch">O</span></span></p>
+    <svg class="trail" id="trail" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+      <path class="t1" id="tpath" pathLength="1" d="M-20 560 C 160 520, 220 380, 330 390 S 520 520, 640 380 S 820 180, 1020 150"/>
+      <path class="t2" d="M-20 560 C 160 520, 220 380, 330 390 S 520 520, 640 380 S 820 180, 1020 150" mask="url(#tm)"/>
+      <mask id="tm" maskUnits="userSpaceOnUse" x="-100" y="0" width="1200" height="600"><path id="tmask" pathLength="1" d="M-20 560 C 160 520, 220 380, 330 390 S 520 520, 640 380 S 820 180, 1020 150" fill="none" stroke="#fff" stroke-width="14" stroke-dasharray="1 1" vector-effect="non-scaling-stroke"/></mask>
+    </svg>
+    <div class="wp" id="wp1"><img src="https://images.unsplash.com/photo-1606493439745-2799e3cafe0f?auto=format&fit=crop&w=700&q=70" alt="Le tour des Aiguilles Rouges" loading="lazy" decoding="async"><p><small>Chamonix</small>Le tour des Aiguilles Rouges</p></div><div class="wp" id="wp2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Cascade_du_Nideck_02_05_2012_1.jpg/960px-Cascade_du_Nideck_02_05_2012_1.jpg" alt="La cascade du Nideck" loading="lazy" decoding="async"><p><small>Vosges · Alsace</small>La cascade du Nideck</p></div><div class="wp" id="wp3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lac_Blanc_%28Orbey%29.jpg/960px-Lac_Blanc_%28Orbey%29.jpg" alt="Le lac Blanc" loading="lazy" decoding="async"><p><small>Vosges</small>Le lac Blanc</p></div><div class="wp" id="wp4"><img src="https://images.unsplash.com/photo-1725953937866-a3a40f4c831b?auto=format&fit=crop&w=700&q=70" alt="Quatre étapes du GR4, dans les gorges du Verdon" loading="lazy" decoding="async"><p><small>GR4</small>Quatre étapes du GR4, dans les gorges du Verdon</p></div>
+  </div>
+</section>
+
+<section class="part" id="projets">
+  <div class="wrap">
+    <p class="eyebrow">Projets extrascolaires</p>
+    <h2 class="h2">Mes projets extrascolaires.</h2>
+    <div class="pgame">
+      <div class="card vid"><video id="gvid" src="assets/jeu-godot.mp4" poster="assets/jeu-godot.jpg" autoplay muted loop playsinline preload="auto" aria-label="Montage du jeu vidéo"></video></div>
+      <div class="card gtext"><h3>Un jeu vidéo développé sur Godot</h3>
+        <ul><li>Développé avec l'aide de l'IA, sur le moteur Godot.</li><li>Un village, des chevaux à monter et une montgolfière.</li><li>Un monde d'îles flottantes, à traverser en sautant d'îlot en îlot.</li></ul></div>
+    </div>
+    <div class="card pgroup">
+      <div class="pg-grid">
+        <div class="pg-item"><h4>Roman</h4><span class="live"><i></i>En cours d'écriture</span><p class="tw" id="tw">J'écris actuellement un roman.</p></div>
+        <div class="pg-item"><h4>Podcast</h4><canvas id="wave" aria-hidden="true"></canvas><p>J'ai créé un podcast pour une radio locale.</p></div>
+        <div class="pg-item"><h4>Sites internet</h4><div class="site" aria-hidden="true"><div class="bar"><i></i><i></i><i></i><b></b></div><div class="vp"><div class="pg"><nav>Atelier bois<span>Accueil Réalisations Contact</span></nav><div class="sh"><img src="https://images.unsplash.com/photo-1779031242515-205111711b23?auto=format&fit=crop&w=700&q=70" alt="" loading="lazy" decoding="async"><p>Le travail du bois,<br>sur mesure.<br><i>Découvrir</i></p></div><div class="cards"><div><img src="https://images.unsplash.com/photo-1788296817269-8df0458ab799?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy" decoding="async"><u></u></div><div><img src="https://images.unsplash.com/photo-1570793005386-840846445fed?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy" decoding="async"><u></u></div><div><img src="https://images.unsplash.com/photo-1634756455420-00bfd92600b8?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy" decoding="async"><u></u></div></div><div class="ft"></div></div></div></div><p>J'aime concevoir des sites internet.</p></div>
+      </div>
+      <div class="frise"><figure class="hp" data-z="0.9" style="--x:11%;--y:27%;--mx:22%;--my:11%;--r:-6deg;--z:0.9"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Lascaux_painting.jpg/500px-Lascaux_painting.jpg" alt="Les peintures de Lascaux" loading="lazy" decoding="async"><figcaption><small>Préhistoire</small>Les peintures de Lascaux</figcaption></div></div></figure><figure class="hp" data-z="0.35" style="--x:31%;--y:15%;--mx:74%;--my:9%;--r:4deg;--z:0.35"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Maler_der_Grabkammer_des_Sennudem_001.jpg/500px-Maler_der_Grabkammer_des_Sennudem_001.jpg" alt="Les débuts de l&#x27;agriculture" loading="lazy" decoding="async"><figcaption><small>Néolithique</small>Les débuts de l&#x27;agriculture</figcaption></div></div></figure><figure class="hp" data-z="0.55" style="--x:69%;--y:15%;--mx:50%;--my:25%;--r:-3deg;--z:0.55"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/All_Gizah_Pyramids.jpg/500px-All_Gizah_Pyramids.jpg" alt="Les pyramides de Gizeh" loading="lazy" decoding="async"><figcaption><small>Antiquité</small>Les pyramides de Gizeh</figcaption></div></div></figure><figure class="hp" data-z="1" style="--x:89%;--y:28%;--mx:26%;--my:72%;--r:5deg;--z:1"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Strasbourg_Cathedral_Exterior_-_Diliff.jpg/500px-Strasbourg_Cathedral_Exterior_-_Diliff.jpg" alt="Les cathédrales gothiques" loading="lazy" decoding="async"><figcaption><small>Moyen Âge</small>Les cathédrales gothiques</figcaption></div></div></figure><figure class="hp" data-z="0.5" style="--x:14%;--y:74%;--mx:76%;--my:70%;--r:4deg;--z:0.5"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/500px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg" alt="L&#x27;imprimerie de Gutenberg" loading="lazy" decoding="async"><figcaption><small>Vers 1455</small>L&#x27;imprimerie de Gutenberg</figcaption></div></div></figure><figure class="hp" data-z="0.75" style="--x:86%;--y:75%;--mx:30%;--my:90%;--r:-5deg;--z:0.75"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/First_flight2.jpg/500px-First_flight2.jpg" alt="Le premier vol des frères Wright" loading="lazy" decoding="async"><figcaption><small>1903</small>Le premier vol des frères Wright</figcaption></div></div></figure><figure class="hp" data-z="0.3" style="--x:50%;--y:84%;--mx:72%;--my:89%;--r:3deg;--z:0.3"><div class="mv"><div class="in"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/500px-Aldrin_Apollo_11_original.jpg" alt="Les premiers pas sur la Lune" loading="lazy" decoding="async"><figcaption><small>1969</small>Les premiers pas sur la Lune</figcaption></div></div></figure><div class="fcap"><b id="n130">130</b><span>événements majeurs de l'humanité, réunis sur une frise chronologique réalisée avec mon grand-père.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="end" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Stage</p>
+    <div class="ncard"><div class="aura2"></div>
+      <h2 class="h2">Du 24 mai au <span class="serif">16 juillet 2027.</span></h2>
+      <div class="cta-row">
+        <a class="btn primary mag" href="mailto:matthieu.pfr@gmail.com?subject=Stage%20de%208%20semaines%20-%20mai%202027"><span>✉ matthieu.pfr@gmail.com</span></a>
+        <a class="btn mag" href="tel:+33782847622"><span>07 82 84 76 22</span></a>
+        <a class="btn mag" href="tableau.html"><span>← Retour au tableau</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><span>Matthieu Peiffer · ICAM Strasbourg-Europe</span><a href="tableau.html">Retour au tableau</a><span class="cr">Photos d'illustration : cascade du Nideck : Vassil (CC0), lac Blanc : Florian Grossir (CC BY-SA 4.0), pyramides de Gizeh : Ricardo Liberato (CC BY-SA 2.0), Bible de Gutenberg : Kevin Eng (CC BY-SA 2.0), cathédrale de Strasbourg : Diliff (CC BY-SA 3.0), autres images de l'histoire : domaine public, via Wikimedia Commons ; autres photos : Unsplash.</span></footer>
+
+<script src="assets/realisations.js?v=fd302289"></script>
+</body>
+</html>
